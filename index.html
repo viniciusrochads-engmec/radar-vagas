@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radar de Estágios | Engenharia & Energia</title>
+    <title>Radar Eng. Mecânica | Estágios, Bolsas UFCIRJ & Desafios</title>
     <style>
         :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #94a3b8; --accent: #38bdf8; }
         body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 1050px; margin: 0 auto; }
-        header { border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 24px; }
-        h1 { margin: 0 0 6px 0; font-size: 1.7rem; color: var(--accent); }
+        .container { max-width: 1160px; margin: 0 auto; }
+        header { border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 20px; }
+        h1 { margin: 0 0 6px 0; font-size: 1.55rem; color: var(--accent); }
         .sub { color: var(--muted); font-size: 0.9rem; margin: 0; }
-        .atalhos { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
-        .atalhos a { background: #1e293b; border: 1px solid #334155; color: #e2e8f0; padding: 8px 14px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+        .secao-titulo { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 16px 0 8px 0; }
+        .atalhos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+        .atalhos a { background: #1e293b; border: 1px solid #334155; color: #e2e8f0; padding: 7px 11px; border-radius: 8px; text-decoration: none; font-size: 0.82rem; }
         .atalhos a:hover { border-color: var(--accent); color: var(--accent); }
-        .filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        button { background: var(--card); color: var(--text); border: 1px solid #475569; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+        .filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+        button { background: var(--card); color: var(--text); border: 1px solid #475569; padding: 7px 14px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.84rem; }
         button.active, button:hover { background: var(--accent); color: #0f172a; border-color: var(--accent); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; margin-top: 18px; }
         .card { background: var(--card); border: 1px solid #334155; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; }
-        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.78rem; }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.76rem; gap: 6px; }
         .badge { padding: 4px 10px; border-radius: 12px; font-weight: 700; }
         .badge-estatal { background: #fef08a; color: #854d0e; }
-        .badge-renovavel { background: #bbf7d0; color: #166534; }
-        .badge-intl { background: #bae6fd; color: #075985; }
-        .date { color: var(--muted); }
-        h3 { margin: 0 0 8px 0; font-size: 1.05rem; line-height: 1.4; }
-        .meta { color: var(--muted); font-size: 0.88rem; margin: 0 0 16px 0; }
+        .badge-energia { background: #bbf7d0; color: #166534; }
+        .badge-agente { background: #e9d5ff; color: #6b21a8; }
+        .badge-bolsa { background: #fed7aa; color: #9a3412; }
+        .badge-desafio { background: #fbcfe8; color: #9d174d; }
+        .badge-ind { background: #bae6fd; color: #075985; }
+        .date { color: var(--muted); white-space: nowrap; }
+        h3 { margin: 0 0 4px 0; font-size: 1.02rem; line-height: 1.35; }
+        .empresa { color: var(--accent); font-weight: 600; font-size: 0.88rem; margin: 0 0 12px 0; }
+        .detalhes { list-style: none; padding: 0; margin: 0 0 16px 0; font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; background: #0f172a; padding: 10px 12px; border-radius: 8px; }
         .btn { display: inline-block; text-align: center; background: #0284c7; color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
         .btn:hover { background: #0369a1; }
     </style>
@@ -34,152 +39,2518 @@
 <body>
     <div class="container">
         <header>
-            <h1>Radar Pessoal de Estágios — Engenharia & Energia</h1>
-            <p class="sub">Última varredura automática: 20/11/2026 às 19:41 (UTC) | Total monitorado: 11 oportunidades</p>
+            <h1>Radar Pessoal — Eng. Mecânica, Bolsas UFCIRJ & Desafios de Energia</h1>
+            <p class="sub">Estágios (Rio, Caxias, Nova Iguaçu, Belford Roxo) • Bolsas CEFET/UFCIRJ • Desafios Globais | Atualizado em 20/11/2026 às 20:31 (UTC)</p>
         </header>
 
+        <div class="secao-titulo">Acesso Rápido — Estágios, Bolsas CEFET/UFCIRJ & Competições</div>
         <div class="atalhos">
-            <a href="https://petrobras.com.br/quem-somos/carreiras" target="_blank">🔎 Petrobras Carreiras</a>
-            <a href="https://portal.ciee.org.br/processos-seletivos-especiais/" target="_blank">🔎 Editais CIEE</a>
-            <a href="https://www.epe.gov.br/pt/a-epe/trabalhe-na-epe" target="_blank">🔎 EPE Energia</a>
-            <a href="https://www.mudes.org.br/" target="_blank">🔎 Portal MUDES</a>
-            <a href="https://www.linkedin.com/jobs/search/?keywords=estagio%20engenharia%20energia%20renovavel&location=Brasil" target="_blank">🔎 LinkedIn Renováveis</a>
-            <a href="https://www.euraxess.ec.europa.eu/jobs/search" target="_blank">🔎 Europa / Euraxess</a>
+            <a href="https://www.cefet-rj.br/index.php/editais-e-processos-seletivos" target="_blank">🎓 Editais CEFET/UFCIRJ</a>
+            <a href="https://dippg.cefet-rj.br/" target="_blank">🔬 DIPPG (PIBIC / JIPP)</a>
+            <a href="https://www.trf2.jus.br/trf2/institucional/estagio" target="_blank">⚖️ TRF2 Estágios</a>
+            <a href="https://www.nube.com.br/vagas-de-estagio/engenharia-mecanica" target="_blank">📋 Nube Mecânica</a>
+            <a href="https://www.mudes.org.br/" target="_blank">📋 MUDES RJ</a>
+            <a href="https://portal.ciee.org.br/processos-seletivos-especiais/" target="_blank">📋 CIEE Editais</a>
+            <a href="https://www.spaceappschallenge.org/" target="_blank">🚀 NASA Space Apps</a>
+            <a href="https://gogreen.se.com/" target="_blank">🌱 Schneider Go Green</a>
+            <a href="https://www.makethefuture.shell/en-gb/shell-eco-marathon" target="_blank">⚡ Shell Eco-marathon</a>
+            <a href="https://www.redbull.com/br-pt/projects/red-bull-basement" target="_blank">🐂 Red Bull Basement</a>
         </div>
 
-        <div class="filtros">
-            <button class="active" onclick="filtrar('todas', this)">Todas (11)</button>
-            <button onclick="filtrar('Estatais & Editais', this)">Estatais & Editais</button>
-            <button onclick="filtrar('Energias Renováveis', this)">Energias Renováveis</button>
-            <button onclick="filtrar('Internacional Remoto', this)">Internacional Remoto</button>
+        <div class="secao-titulo">Filtrar por Categoria</div>
+        <div class="filtros" id="filtro-cat">
+            <button class="active" onclick="setCat('todas', this)">Todas (163)</button>
+            <button onclick="setCat('Bolsas & Editais CEFET/UFCIRJ', this)">Bolsas & Editais CEFET/UFCIRJ</button>
+            <button onclick="setCat('Desafios & Hackathons', this)">Desafios & Hackathons</button>
+            <button onclick="setCat('Órgãos Públicos & Estatais', this)">Órgãos Públicos & Estatais</button>
+            <button onclick="setCat('Agentes (Nube / MUDES / CIEE)', this)">Agentes (Nube / MUDES / CIEE)</button>
+            <button onclick="setCat('Energia Solar & Eólica', this)">Energia Solar & Eólica</button>
+            <button onclick="setCat('Indústria & Engenharia', this)">Indústria & Engenharia</button>
         </div>
 
-        <div class="grid" id="lista-vagas">
+        <div class="secao-titulo">Filtrar Estágios por Cidade</div>
+        <div class="filtros" id="filtro-city">
+            <button class="active" onclick="setCity('todas', this)">Todas</button>
+            <button onclick="setCity('Rio de Janeiro', this)">Rio de Janeiro</button>
+            <button onclick="setCity('Duque de Caxias', this)">Duque de Caxias</button>
+            <button onclick="setCity('Nova Iguaçu', this)">Nova Iguaçu</button>
+            <button onclick="setCity('Belford Roxo', this)">Belford Roxo</button>
+        </div>
+
+        <div class="grid">
             
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Programa Petrobras Socioambiental</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://petrobras.com.br/sustentabilidade/socioambiental" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Ações de Extensão</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/index.php/deac" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Petrobras Cultural</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://petrobras.com.br/sustentabilidade/cultural" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Projetos e Programas de Extensão (Editais PBEXT)</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/index.php/projetos-e-programas-de-extensao-editais-pbext" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Time Petrobras</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://petrobras.com.br/sustentabilidade/time-petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>⁠Atividades e Projetos de Extensão - Fluxo Contínuo</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/index.php/atividades-e-projetos-de-extensao-fluxo-continuo" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Empresas do Sistema Petrobras</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://petrobras.com.br/quem-somos/participacoes-societarias" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>⁠Semana de Extensão</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/index.php/semana-extensao-2" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Página inicial Petrobras Logo Petrobras</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://petrobras.com.br" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Edital Direx / Gidac</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/index.php/edital-direx-gidac" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Página da Petrobras no Bluesky</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://bsky.app/profile/petrobras.com.br" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Resultado Final - Edital Interno nº 09/2025 - Bolsa Auxílio do Programa de Estudantes</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado Final - Edital Interno nº 09.2025 - Bolsa Auxílio do Programa de Estudantes.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Página da Petrobras no Facebook</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://www.threads.net/@petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Resultado Preliminar - Edital Interno nº 09/2025 - Bolsa Auxílio do Programa de Estudantes</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado Preliminar - Edital Interno nº 092025 - Bolsa Auxílio do Programa de.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Página da Petrobras no Instagram</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://www.facebook.com/petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Anexo III  Edital Interno nº 09/2025</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ANEXO 3 - PEC-G.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Página da Petrobras no Youtube</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://instagram.com/petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Anexo II  Edital Interno nº 09/2025</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ANEXO 2 - PEC-G.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Página da Petrobras no LinkedIn</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://www.tiktok.com/@petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Anexo I  Edital Interno nº 09/2025</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ANEXO 1 - PEC-G.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
-        <div class="card" data-cat="Estatais & Editais">
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
             <div class="card-top">
-                <span class="badge badge-estatal">Estatais & Editais</span>
-                <span class="date">Capturada em 20/11/2026</span>
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
             </div>
-            <h3>Investidor Petrobras</h3>
-            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
-            <a href="https://investidorpetrobras.com.br/" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+            <h3>Edital Interno nº 09/2025 - Bolsa Auxílio do Programa de Estudantes</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/EDITAL ALUNOS PROGRAMA PEC-G.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final - Edital nº 08/2025 - Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ResultadoFinal - Edital nº 08.2025 - Intercâmbio Estudantil.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final - Edital nº 07/2025 - Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado final - Edital nº 07.2025 - Universidades Parceiras.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital nº 08/2025 - Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado Preliminar 08.2025.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital nº 07/2025 - Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado Preliminar - Edital 07.2025.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 08/2025 - Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 8.2025 - SRI.DIPPG.CEFET-RJ.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 07/2025 - Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 7.2025 - SRI.DIPPG.CEFET-RJ.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final - Edital Interno nº 06/2025 - Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/RESULTADO FINAL Edital Nº 6.2025 - PROGRAMA DE INTERCÂMBIO EM UNIVERSIDADES PARCEIRAS.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final - Edital Interno nº 05/2025 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/RESULTADO FINAL - EDITAL 5.2025 - PROGRAMA DE DUPLA DIPLOMAÇÃO.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final - Edital Interno nº 04/2025 - Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%204...2025 - INTERCÂMBIO ESTUDANTIL.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final - Edital nº 01.2025 - Mobilidade Internacional REARI</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital REARI 012025 - Resultado final.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital nº 01.2025 - Mobilidade Internacional REARI e redes parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 012025 - Resultado preliminar.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital Interno nº 06/2025 - Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado preliminar_edital_06_2025_Universidades parceiras.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital Interno nº 05/2025 - Dulpa Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado preliminar_Dupla Diplomação.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital Interno nº 04/2025 - Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado preliminar_Edital_04_2025_ institutos.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital nº 01.2025 - Mobilidade Internacional Reari e redes parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://reari.uff.br/edital-unificado/" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata nº 01 - Edital Interno nº 05/2025 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Errata%2001.2025.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 06/2025 - Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 06.2025 Intercâmbio Estudantil em Universidades Parceiras.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Anexos do Edital Interno nº 05/2025</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://cefetrjbr-my.sharepoint.com/:w:/g/personal/08735569760_cefet-rj_br/EdmMIl_Z6SdAogVqtLCmXm0BLYZpi2yy4tn9pDrUdIPTvA?rtime=NqXQJTkc3Eg" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 05/2025 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 05.2025 Dulpa Diplomação.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 04/2025 - Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 04.2025 INTERCÂMBIO ESTUDANTIL Institutos.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 10 - Programa Cidadão Global - Conif</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://portal.conif.org.br/editais/2024/edital-10-programa-cidadao-global-conif" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final Edital Interno nº 01/2024 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado Final Dupla Diplomaçao.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final - Edital Interno nº 03.2024 Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado Final Edital 03_2024.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final - Edital Interno nº 02.2024 Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado Final Edital_02_2024.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final Edital PEC-G Nº 01.2024 - Bolsa Auxílio Programa De Estudantes</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado final PECG.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar Edital Interno nº 01/2024 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado preliminar Edital Dupla Diplomação.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar Edital PEC-G Nº 01.2024 - Bolsa Auxílio Programa De Estudantes</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado Preliminar Edital PEC-G Nº 01.2024 - Bolsa Auxílio Programa De Estudantes.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital Interno nº 03.2024 Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ResultadoPreliminarEdital03_2024.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital Interno nº 02.2024 Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ResultadoPreliminar Edital 02_2024.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado final - Edital 01.2024 - Mobilidade Internacional Reari</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 012024 - Resultado final.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata nº 01 Edital Interno nº 02.2024 Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Errata1_edital_02_2024.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata nº2 Edital nº 03/2024 Intercâmbio em Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Errata2.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Preliminar - Edital 01.2024 - Mobilidade Internacional Reari</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 01.2024 - Resultado preliminar.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata nº 01 Edital nº 03/2024 Intercâmbio em Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Errata1.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Anexos do Edital PEC-G Nº 01.2024 - Bolsa Auxílio Programa De Estudantes</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Anexos do edital do PECG2024 (7).pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital PEC-G Nº 01.2024 - Bolsa Auxílio Programa De Estudantes</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital_PEC-G_01.2024 atualizado.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 03.2024 Intercâmbio em Universidades Parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/edital_03_2024_universidades.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 02.2024 Intercâmbio Estudantil</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/edital_02_2024_institutos.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 4 do CONIF - Programa de Assistentes Brasileiros de Conversação na Espanha</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://portal.conif.org.br/images/Editais/2024/2_Fevereiro/edital-04_2024---assistentes-pt-docx.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 012024 - Anexo III - Certificados de Proficiência de Idiomas Aceitos - atualização</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 012024 - Anexo III - Certificados de Proficiência de Idiomas Aceitos.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01.2024 - Anexo III - Certificados de Proficiência de Idiomas Aceitos</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 012024 - Anexo III - Certificados de Proficiência de Idiomas Aceitos.docx.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01.2024 - Mobilidade Internacional Reari e redes parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 01.2024 - Mobilidade Internacional Reari e redes parceiras.docx.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata - Edital 01.2024 - Mobilidade Internacional Reari e redes parceiras</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 012024 - ERRATA.docx (1).pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01.2024 - Anexo VI - Critérios de seleção e classificação de cada Instituição.docx</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 01.2024 - Anexo VI - Critérios de seleção e classificação de cada Instituição.docx.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01.2024 - Anexo V - Termo de Concordância do Coordenador.docx</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 01.2024 - Anexo V - Termo de Concordância do Coordenador.docx.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01.2024 - Anexo IV - Modelo de Carta de Apresentação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 01.2024 - Anexo IV - Modelo de Carta de Apresentação.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01.2024 - Anexo III - Certificados de Proficiência de Idiomas Aceitos</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 01.2024 - Anexo III - Certificados de Proficiência de Idiomas Aceitos.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01.2024 - Anexo II - Países e instituições de destino, cursos e especificidades</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 01.2024 - Anexo II - Países e instituições de destino, cursos e especificidades.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01.2024 - Anexo I - Formulário de Inscrição</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital 01.2024 - Anexo I - Formulário de Inscrição.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata - Edital interno nº 01/2024 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Errata_01_editalDupla2024.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 01/2024 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/PROCESSO SELETIVO INTERNO PARA PROGRAMA DE DUPLA DIPLOMAÇÃO.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado do Edital do Programa de Estágio Interno não obrigatório - ASCRI</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado do Edital do Programa de Estágio Interno não obrigatotório.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Termo Aditivo ao Edital Interno nº 02/2023 - Programa de Intercâmbio Estudantil - La Rochelle</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Termo aditivo edital 02.2023.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Termo Aditivo ao Edital Interno nº 01/2023 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Termo aditivo ao Edital 01.2023.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 02/2023 Programa de Intercâmbio Estudantil - La Rochelle - Resultado Final</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado_Definitivo_LaRochelle_02.2023.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº02/2023 Programa de Intercâmbio Estudantil - La Rochelle - Resultado</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Resultado_LaRochelle_02.2023.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 02/2023 Programa de Intercâmbio Estudantil - La Rochelle - Candidatos Habilitados</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital022023Candidatoshabilitados_.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 02/2023 Programa de Intercâmbio Estudantil - La Rochelle</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/12_-_Edital_La_Rochelle.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno 01/2023 - Dupla Diplomação - Resultado Final</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital Interno 01.2023 - Dupla Diplomação - Resultado Final..pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Interno nº 01/2023 – Dupla Diplomação - Resultado Preliminar</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital Interno Nº 01_2023_DuplaDiplomação_Resultado_Preliminar....pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata 2 - Edital Interno nº 01/2023 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Errata_2_edital_interno_01_2023_DuplaDiplomação.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata - Edital Interno nº 01/2023 - Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Errata_edital_interno_01_2023_DuplaDiplomação.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL Nº 02.2023 – Reari-RJ - Aix-Marseille - Resultado final</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/EDITAL Nº 02.2023 – Reari-RJ - Aix-Marseille - Resultado final.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL Nº 01.2023 – Reari-R J - Utrecht Network - Resultado final</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/EDITAL Nº 01.2023 – Reari-R J - Utrecht Network - Resultado final.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL Nº 02/2023 – Reari-RJ/Aix-Marseille - Resultado Preliminar</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/EDITAL%20N%C2%BA%20022023%20%E2%80%93%20Reari-RJ%20-%20Aix-Marseille%20-%20Resultado%20preliminar.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL Nº 01/2023 – Reari-RJ/Utrecht Network - Resultado Preliminar</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/EDITAL%20N%C2%BA%20012023%20%E2%80%93%20Reari-R%20J-%20Utrecht%20Network%20-%20Resultado%20preliminar.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL Nº 02.2023 – Reari-RJ - Aix-Marseille</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital-022023-Mobilidade-Internacional-Reari-Aix-Marseille.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL Nº 01/2023 – Reari-RJ/Utrecht Network</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital-012023-Mobilidade-Internacional-Reari-Utrecht.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado preliminarEdital PEC-G - 01/2023 - Resultado Final</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital_PECG_01_2023_ResultadoFinal.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Pec-G - 01/2023 - Resultado Preliminar</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital_PEC-G_01_2023_ResultadoPreliminar.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital Bolsa-Auxílio PEC-G - 01/2023- Candidaturas homologadas</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital_PEC-G_01_2023- Candidaturas homologadas.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Errata nº 01 do Edital 01/2023 - Alteração dos Membros da Banca Avaliadora.</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Errata%2001 PEC-G.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01/2023 - Bolsa auxílio programa de estudantes - Convênio de graduação (PEC-G)</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/EDITAL 01_2023-PEC_G.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado Final do Programa de Dupla Diplomação - No 01/2022</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/RESULTADO FINAL DO PROCESSO DE SELEÇÃO EDITAL 01.2022[49].pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Resultado do Programa de Dupla Diplomação - No 01/2022</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/RESULTADO%20DO%20PROCESSO%20DE%20SELEC%CC%A7A%CC%83O%20EDITAL%2001.2022[34].pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>27/07/2022 - PROGRAMA DE DUPLA DIPLOMAÇÃO ENTRE O CEFET/RJ E OS INSTITUTOS POLITÉCNICO DE BRAGANÇA E PORTALEGRE</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/05%20-%20Edital%20Dupla%20Diplomac%CC%A7a%CC%83o%20INSTITUTOS%202022_IPB_IPPORTOALEGRE%20-%202022%20(1).pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Homologação das Candidaturas do Edital 13/CONIF - Edital 13 - Curso de inglês para Estudantes da Rede Federal – (RELO Office, EUA)</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://portal.conif.org.br/images/Editais/7_Julho/edital-13-2022---homologacao.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>11/03/2022 - BOLSA AUXÍLIO PROGRAMA DE ESTUDANTES-CONVÊNIO DE GRADUAÇÃO (PEC-G)</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital_Interno_01_2022_Bolsa_Auxilio_PEC_G_.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>22/03/2022 - Candidaturas homologadas - Edital Bolsa-Auxílio PEC-G 01/2022</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital_PEC-G_01_20222- Candidaturas homologadas.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>28/03/2022 - Resultado Preliminar - Edital Bolsa-Auxílio PEC-G 01/2022</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital_PEC-G-20222- Resultado_Preliminar_pdf.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>31/03/2022 - Resultado Final - Edital Bolsa-Auxílio PEC-G 01/2022</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital_PEC-G-20222- Resultado_FINAL.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>13/09/2019 - PROGRAMA DE DUPLA DIPLOMAÇÃO ENTRE O CEFET/RJ E OS INSTITUTOS POLITÉCNICO DE BRAGANÇA E PORTALEGRE. LISTA PRELIMINAR DOS CANDIDATOS CLASSIFICADOS</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Classifica%C3%A7%C3%A3o%20preliminar%20EDITAL%20062019%20IPB%20IPPORTALEGRE.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>06/08/2019 - EDITAL INTERNO No 06/2019 PROGRAMA DE DUPLA DIPLOMAÇÃO ENTRE O CEFET/RJ E OS INSTITUTOS POLITÉCNICO DE BRAGANÇA E PORTALEGRE</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%20Dupla%20Diploma%C3%A7%C3%A3o%20INSTITUTOS%202019%20ver%20final%2006082019.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>22/03/2019 - EDITAL INTERNO No 03/2019 PROGRAMA DE INTERCÂMBIO ESTUDANTIL INSTITUTOS POLITÉCNICOS DE PORTUGAL</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/edital%203%202019%20institutos%20portugueses.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>22/03/2019 -CLASSIFICAÇÃO FINAL DE ESTUDANTES PARA PARTICIPAR DO PROGRAMA DUPLA DIPLOMAÇÃO</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Classifica%C3%A7%C3%A3o%20FINAL%20EDITAL%20052019%20Publica%C3%A7%C3%A3o%2022032019.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>14/03/2019 - LISTA PRELIMINAR DE ESTUDANTES HABILITADOS PARA PARTICIPAR DO PROGRAMA DUPLA DIPLOMAÇÃO</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Classifica%C3%A7%C3%A3o%20PRELIMINAR%20EDITAL%20052019.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>26/02/2019 - EDITAL 04/19 PROGRAMA DE INTERCÂMBIO - ESTADOS UNIDOS</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/edital%204%20de%202019%20-%20SMU.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>26/02/2019 - Edital 012019 - Anexo VI - Informações Específicas de cada Instituição</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%20012019%20-%20Anexo%20VI%20-%20Informa%C3%A7%C3%B5es%20Espec%C3%ADficas%20de%20cada%20Institui%C3%A7%C3%A3o.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>26/02/2019 - Edital 012019 - Anexo V - Modelo de Concordância do Coordenador</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%20012019%20-%20Anexo%20V%20-%20Modelo%20de%20Concord%C3%A2ncia%20do%20Coordenador.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>26/02/2019 - Edital 012019 - Anexo IV - Modelo de Carta de Apresentação UFF</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%20012019%20-%20Anexo%20IV%20-%20Modelo%20de%20Carta%20de%20Apresenta%C3%A7%C3%A3o.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>26/02/2019 - Edital 012019 - Anexo II - Países e Instituições de destino, Cursos e Especificidades</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%20012019%20-%20Anexo%20II%20-%20Pa%C3%ADses%20e%20Institui%C3%A7%C3%B5es%20de%20destino,%20Cursos%20e%20Especificidades.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>26/02/2019 - Edital 012019 - Anexo I - Formulário de Inscrição</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%20012019%20-%20Anexo%20I%20-%20Formula%CC%81rio%20de%20Inscric%CC%A7a%CC%83o.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>26/02/2019 - Edital 012019 - Mobilidade Internacional Reari-Utrecht</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%20012019%20-%20Mobilidade%20Internacional%20Reari-Utrecht.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>21/02/2019 - SELEÇÃO PARA PROGRAMA DE INTERCÂMBIO ESTUDANTIL EM UNIVERSIDADES PARCEIRAS</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/edital%202%202019%20universidades.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>13/11/2018 - Resultados Editais Dupla Diplomação 12-15/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Classifica%C3%A7%C3%A3o%20Editais%20DD%2012-15%202018.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>02/10/2018 - RESULTADO PROCESSO SELETIVO EDITAL 11/2018 INSTITUTOS PORTUGUESES</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Classificados Edital 11.18.docx" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>22/05/2018 - RESULTADO PROCESSO SELETIVO EDITAL 07/2018 DUPLA DIPLOMAÇÃO INSTITUTO POLITÉCNICO DE BRAGANÇA.</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/SELE%C3%87%C3%83O%20DD%20EDITAIS%202018%20-%20Engenharia%20Eletr%C3%B4nica.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>22/05/2018 - RESULTADO PROCESSO SELETIVO EDITAL 05/2018 DUPLA DIPLOMAÇÃO INSTITUTO POLITÉCNICO DE BRAGANÇA.</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/SELE%C3%87%C3%83O%20DD%20EDITAIS%202018%20-%20Engenharia%20El%C3%A9trica.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>22/05/2018 - RESULTADO PROCESSO SELETIVO EDITAL 01/2018 DUPLA DIPLOMAÇÃO INSTITUTO POLITÉCNICO DE BRAGANÇA.</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/SELE%C3%87%C3%83O%20DD%20EDITAIS%202018%20-%20Engenharia%20Mec%C3%A2nica.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>14/05/2018 - RESULTADO PROCESSO SELETIVO EDITAIS 03/2018 PROGRAMA DE INTERCÂMBIO ESTUDANTIL PORTUGAL E 04/2018 PROGRAMA DE INTERCÂMBIO ESTUDANTIL PORTUGAL, ESPANHA, ALEMANHA, FRANÇA E ITÁLIA.</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/RESULTADO%2003.18%20E%2004.18.png" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>04/04/2018 - Fichas de Inscrição Edital 01/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ANEXOS%20EDITAL%2001%202018%20PROGRAMA%20DUPLA%20TITULA%C3%87%C3%83O%20ENGENHARIA%20MEC%C3%82NICA.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>04/04/2018 - Fichas de Inscrição Edital 05/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ANEXOS%20EDITAL%2005%202018%20PROGRAMA%20DUPLA%20TITULA%C3%87%C3%83O%20ENGENHARIA%20EL%C3%89TRICA.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>04/04/2018 - Fichas de Inscrição Edital 06/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ANEXOS%20EDITAL%2006%202018%20PROGRAMA%20DUPLA%20TITULA%C3%87%C3%83O%20ENGENHARIA%20ALIMENTOS.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>04/04/2018 - Fichas de Inscrição Edital 07/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/ANEXOS%20EDITAL%2007%202018%20PROGRAMA%20DUPLA%20TITULA%C3%87%C3%83O%20ENGENHARIA%20ELETR%C3%94NICA.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL 01/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%2001%202018%20Eng%20Mec%C3%A2nica.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital 01/2023 de Bolsas de auxílio para PEC-G</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/EDITAL%2001_2023-PEC_G.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL 05/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%2005%202018%20Eng%20El%C3%A9trica.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL 06/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/Edital%2006%202018.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>EDITAL 07/2018</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/attachments/article/236/edital%2007%202018%20ascri-diren.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Intercâmbio/ Mobilidade out</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/index.php/intercambio-mobilidade-out" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Intercâmbio/ Mobilidade In</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/index.php/intercambio-mobilidade-in" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="Maracanã / Nova Iguaçu">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Dupla Diplomação</h3>
+            <p class="empresa">CEFET/RJ (UFCIRJ) — Editais e Processos Seletivos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Maracanã / Nova Iguaçu</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://www.cefet-rj.br/index.php/dupla-diplomacao-ascri" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Programa Institucional de Bolsas de Iniciação Científica (PIBIC)</h3>
+            <p class="empresa">DIPPG CEFET/RJ — Pesquisa, PIBIC e Eventos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://dippg.cefet-rj.br/index.php/pt/pibic" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Jornada Integrada de Pesquisa e Pós-Graduação (JIPP)</h3>
+            <p class="empresa">DIPPG CEFET/RJ — Pesquisa, PIBIC e Eventos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://dippg.cefet-rj.br/jipp/index.php/pt/" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Confira a produção científica da JIPP 2026: Livros de Resumo já estão online</h3>
+            <p class="empresa">DIPPG CEFET/RJ — Pesquisa, PIBIC e Eventos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://dippg.cefet-rj.br/index.php/pt/noticias/2662-confira-a-producao-cientifica-da-jipp-2026-livros-de-resumo-ja-estao-online" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Certificados da JIPP 2026 já estão disponíveis para download</h3>
+            <p class="empresa">DIPPG CEFET/RJ — Pesquisa, PIBIC e Eventos</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Ver regras do edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Auxílio Institucional</li>
+            </ul>
+            <a href="https://dippg.cefet-rj.br/index.php/pt/noticias/2652-certificados-jipp-2026" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro - RJ (Ilha do Fundão)">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Programa de Estágios do Cepel</h3>
+            <p class="empresa">CEPEL (Pesquisa de Energia Elétrica)</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro - RJ (Ilha do Fundão)</li>
+                <li><strong>🎓 Requisito:</strong> Consultar no edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Consultar no edital</li>
+            </ul>
+            <a href="https://estagiocepel.gupy.io/" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro - RJ (Ilha do Fundão)">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>1 – Edital de Pregão Eletrônico</h3>
+            <p class="empresa">CEPEL (Pesquisa de Energia Elétrica)</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro - RJ (Ilha do Fundão)</li>
+                <li><strong>🎓 Requisito:</strong> Consultar no edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Consultar no edital</li>
+            </ul>
+            <a href="https://172.18.3.8/wp-content/uploads/2021/11/1-Edital-de-Pregao-Eletronico.pdf" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro - RJ">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Vitrine de Vagas</h3>
+            <p class="empresa">CIEE (Processos Seletivos Públicos)</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro - RJ</li>
+                <li><strong>🎓 Requisito:</strong> Consultar no edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Consultar no edital</li>
+            </ul>
+            <a href="https://portal.ciee.org.br/quero-uma-vaga/" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro - RJ">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Mural de Vagas</h3>
+            <p class="empresa">ISBET (Parceiro Governo RJ)</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro - RJ</li>
+                <li><strong>🎓 Requisito:</strong> Consultar no edital</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Consultar no edital</li>
+            </ul>
+            <a href="https://isbet.org.br/quero-uma-vaga/" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro / Caxias">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Estágio Petrobras 2026: Edital abre 150 vagas pelo Brasil - Ache Concursos</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro / Caxias</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPZlFjdm9YbUM4YVU4WnNEODNSakstVldWdzBXWVVmLWdtaTlZM3hscGpCbDFCalNKMEszZ19PUnd4dVdYa1Q0NHprYmtFRVIzMzBRbl9qZU1tdFpKRXhJSHloOUZoanNHMk85ZGlEVzZRRU9sSnpDZkh5d2VvcHFvenJUNjFZcHh5SXFobXgzUkdqWmo4M0NpbWFjYnN4cW1hX0ZmaXFiMTlPdw?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro / Caxias">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Petrobras lança Programa de Estágio com vagas em SJC - Portal AquiVale</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro / Caxias</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTmVBcUd4QXBneGtVcC1hZVVfWkFPN085NF9nRnFtSlFpNXlzNlF2S1Nhd042MnFManAwTnVmYXR1dWRlbGFHeUVNaFZ4V1BvX3hiZ3RfLU1pdzZFNTdEMUh2S2NIZ3RJNlF3U3ROUXhncFhjNWVSbFFmTGxOcFNwcU5CNTNWcjViZzd3?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro / Caxias">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>ESTÁGIO | Oportunidades para estudantes de Engenharia Mecânica na Petrobras – Campus Ipojuca - IFPE</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro / Caxias</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxNQTN2Q2hTQXFnbzJuc01mdDZVYWFva2F4cldhY2c3VzEyX19yaVdrNGxaUjluSkVNTjVQakIxa0FtR2tkTE1yeHNKSmZZd0cyd1NvTnYybXM1TmNFazV1aWVPTUxCSHlheGJCcGhXbUxNUW1ySXpQcjFiVU9oamxzYVJOYkJqWG1BNzdRcURhNUFCbTBxenVWZDl1WFRPZ0RYSWtORG1GSTduRkRrY0gwd1lfeHRoLU5leXc?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro / Caxias">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Inscrições para estágio na Petrobras terminam na quarta-feira (03/06) - gbnews.com.br</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro / Caxias</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPSVNUY0hvSXlrTWlxY1h6RXJSVGFVa2s4eWtudmZvZ0FQa2tJQ1VrV0hjOHg3X1V2NEdIS1UxSXNaeGxHWndmVXNmb1UyOURJX01sbFRLenRaNDM2dGIybklVbXNrck44Slp5NDBHVkxaUUxqWGQyU0pMU0NTYXJQdlRpSlZJMlZXbXVZNTk5NU5RSjRCUWRGN0EtaXBxcHp0Y0dvd0lEVVF6UmczWGlzYzZtZUFkY1VPZzJuNw?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro / Caxias">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Estágio Petrobras 2026: 150 Vagas com Bolsa de R$ 1.825 - Engenharia 360</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro / Caxias</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE9hWUYzeDM3eDc1c1FXMmVxQTRVakx4bHBtUDByQWEwMDV6TnJvX2h5aGwwSXRxazFQbUMyOWlUUGhQMENEWDJMOWt6NHh5dzZpaE5qRkcwa1NFWmhkemNIWnlRcEN2Zw?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro / Caxias">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Embasa abre inscrições para mais de 100 vagas de estágio - G1</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro / Caxias</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPZUJINlVFOGNyQzVDZ0VLaC1LWlU3cTNqTUtaR3FRM1JldmEtd196Q0N4eFg0cVJhWGJkQ1RSQXpiT2NkNEt4bWJmdGlZNFZaR0w0cUhscFB5SHBUWm93b1BWcVlYTDFpM1JCU0x5WWNIUllmcHdsY1pyLTd1dFlOY3FEME8zVnBKWi0tWW43Tl9aclhLUHZHYWxB0gGoAUFVX3lxTFBSR1VMOTVlLWN2MzlsdnRwZDJxdkxOMExmYllyVWpXNm9XV3dCb2x3NERqYktqZkJUQ1UwSFdOUEctczY0TXBFRkd2clVjakt6dDRoZG1xMTNZSzhuVjBPQTFXT2hQVjNZdmRrYkhiQ0FrdDEzQnhkR0VZeEVYRFBXR2dlQU9pNzFySFBQdmpYMkNtVDhuOVVJVjhucWNGWjF3Y1lIWFoxcQ?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro / Caxias">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Como estudar para o Concurso Petrobras? - Engenharia 360</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro / Caxias</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFBRcWQ2X3F3WGNfbGRqQ04zTXQwTDkwV211aUdDRENmNDhlejdUOVdKTW9INW1EZFlTcmwxZzl1WmI5ZkVudExVaHRqNmUtcFlFTWY5MXFrNlZwSExlM0x1QTkwdjhUMWRjM3R5T2lEaC1ZUmxFTjZBZndiVjI?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Órgãos Públicos & Estatais" data-city="Rio de Janeiro / Caxias">
+            <div class="card-top">
+                <span class="badge badge-estatal">Órgãos Públicos & Estatais</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Petrobras abre processo seletivo com mais de 200 vagas para estágio - Ache Concursos</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Rio de Janeiro / Caxias</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxPTTZEd1lqQzZZM2pkYzhfUmFtY2hhMklaMDZpYl92d1Q3QlhEUU1wWU53UnY2OTFxYzl0UkVoZEtPY0FFTjNId2VXTmVfdF9EYjhsTlpTT2JxckJITFA0VU41ZExiWWZJNllxMGFuNjFOMUl1UXVmYjFfaERvNWRHS1hhOUlWQW5XNk1FVjBlNjZMR1kzQWlVd3JEX3VuWEZuQUxHN1BxcVY?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Concurso CEFET RJ segue válido até 2028! - Blog Gran Cursos Online</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE83YnNtU2s3MjFLUVcwZzR3a2RZRGo3eldJX1I1T1BqX0FQMUd5aVZHaEU2X2NnWXNDWVJoRGNCT1k5MGQxdGxkS0hKcHNlTWZtckxNSlF5SXZvd1RBV2RXbVVsNkUwdw?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>CEFET/RJ lança Edital para o primeiro Mestrado Profissional EAD reconhecido pelo MEC - PEBSP</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxQT0lLUk1mc3BDWGgzNno1Y2hFdnJFeDQxa1czSGY0TDEySk1xU0hZb05jS1ZMaUdaSnhKUnF2Vk5wdVZOZDZtS01LTGI2VjZ1cjFEM1lRMlFEeHpzcW1Ec1VmYTNkNFIwS3dnMW41aFF0b1hNa0pmakxPSjlWZmZocnlvSnJKOXlwR0lqYVBqNHJrTG5qQnFvRGNpeDhITWlSczE2NHM4UFFyaWc?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Concurso Cefet RJ 2024 tem prazo de validade prorrogado - Degrau Cultural</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQRGR0WDM3enA5RVl6eGlOcHdDMUVkSW1ZWFpnVjhkMVBGbF9fbjZLYUNNalVyTDN2RGtjOFZ0a21QTVVxNEhFd1g1S1dab3VBb1ZEZl9jNWRFRG9OeVo5SktXRmFUTzNHMVFVakgtVFZWSDlQN0pobXNlSW1sdTVtZ0h4ZFJnR1drVnA1ZnZ3bW9QNzVvQ2tMbA?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital CEFET-RJ 2026 é publicado com 22 vagas para Professores - Ache Concursos</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNY0Z0VV9NNG5ZUUJ2UnFBRlFoLVN2dVVYYkl6VnM0dkQ5TzI4cFN3eUUzTGNVcmdVd0tjR01BYzZHbUhsQTdwaU81azBFRzNLa2xFd3FhMU9WUVJLMmhmWjdyMEsyY2hVR2V2QjVKbmk2YVkzNnBWSEhFU2MyZEZhaGpaRFJyb0toelJvVWJNTWxQSFhSc0Rfa2h0NTJMcDBuTUxsMXhrSE1CVzFER3dvNTRrOGV1TVluWmFhaFVDM3ktdw?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Edital CEFET RJ: provas em maio - Estratégia Concursos</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxPUUZKSEVOekpjRjlsM19WLWE3Umt4Q0tjUTh1UkJqc0IyLXF3enpGdExNWjcwc0NKYmpnLV9sQ3RWejFDU0lySWpuMkRoWkNqWUxSOFcteHl2NnZzeEFYSnp1d1pQWmNDTXhERDlXU0M2bm5nVTRLNVNKM2xydkw2YzZnQ2ZWcHBxNmFnZk530gGTAUFVX3lxTE5JS3dRamhOQ3VOdTA1Q0oxM1lieU41eWRiQVdOSUJIZXVkX1kwdjFJY2UwQXdOQjFjejhfQ25aZ2pPa1h2eUVFcTZUT1VSZERrZTNwdUZFV09qbGY5UHgwV0tQemwtLUJxZDJyakNtLThTaXpVbzkzN0ZnMnRxd3JBOEQtTC12MFB5aW45Y3BfTkJXTQ?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Concurso CEFET RJ: novo edital está em análise - Blog Gran Cursos Online</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxQTUlaMWcxQ3MweUUzRnlfTkJuaTNlNXpKSVJQZzhCZmlwNUtOakZOTnUtdVFRUkFIcGpjeUoxZW5TOS1uTE41N29QcHBsQ01aTEwwTkphMTdleVVIZFl4RDZkTXZzNURzOEVpelZNSEttM3hfTndfdWs2a1RlUEhZVlRYd1c?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Cefet-RJ publica edital com 1.024 vagas para cursos técnicos integrados ao Ensino Médio para ingresso em 2027 - PEBSP</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxNLUdWNURDam13RjFjb2IzT1JRdXFoS0hSTHVpNVQweDNYV2FjRmZBaUlwc2xjcWF2UTNqOUNMa1JpT2dyc1BuQnhYeXh5Xy1mWE0zOE5pX2R5Q2ozZ3ktYWVQSUtOTWZOMnBzYUxzQ2VWWGFVSDZPa1ljem1TU1RUdW8tREhHTXRncUJ0Zm9mdkJTZUJGNy1kOFZoT0pSc2phTkl6ZWtEN3ZBeVFZX0NDX3YzSXBYdkhoMk9Gb2JtU0hnQTRTS2ZQSlhhWXdJa3FhMUE?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Bolsas & Editais CEFET/UFCIRJ" data-city="CEFET/RJ (UFCIRJ)">
+            <div class="card-top">
+                <span class="badge badge-bolsa">Bolsas & Editais CEFET/UFCIRJ</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Concurso Cefet RJ: saiu edital para professor - Degrau Cultural</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> CEFET/RJ (UFCIRJ)</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxQSHV6cVoycjdMSXJMSlM4QmtqbEFsd2VDUTlpN0szV2t4Z1dwTkYyVTVXRUlHVWJMTG4ySmdMT3dUMV8xcnQwelhOVzVOSjhOTDIyQVNWZDZxWlozMmRjZmd0WkF5UW1kX3d6YmJDLWNrSnRaVnpBYlFtV2xISlVSS2l0Q3d0cUdsTHc?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Nacional / Global">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>NASA Space Apps Challenge acontece neste fim de semana em Lajeado - Univates</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Nacional / Global</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxPbmdLTFpEZ1ZVdDR0cFNOSVJSYlZ2cmwtalpUaDlPTEdCV3l0ZFVSY3l6Y3FfbkFMZDBVeVZONjM0YWhHMVNYT3lFVllfUlJCUWdCRU5sSGNtWlBuLXNDOXJZZE9zUjNLY3hkRmlrdkd1ZTRxOGMwTGR4M0VWZzMwR25ockVCYUduRGpWSmdLZmRCXy01VXlHZGlON3RmZTQ?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Nacional / Global">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Maratona de inovação da Nasa será realizada em Vitória da Conquista - UESB</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Nacional / Global</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQNW5yZENvcUpuUlBOYVpGZ2dQS3NCaVdVN056Ml81cGstSXhOTGFQdkoyV2dNNGxXR3JROURUQndrd3pHalBCTXZPWlc5QWltZW5Jc2ZJdmxKSDQ1YjBHQnJrVXhMZHBOUjlza2Q3WXRGLUJ1Y2VXLW41aFl2bkdPTDM3c0FfTGdhMEdyVXBEeUVaVk9teUtjQlhqd2tLdw?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Nacional / Global">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Shell Eco-marathon Brasil celebra dez anos com avanços em eficiência energética e formação de novos engenheiros - TN Petróleo</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Nacional / Global</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxNcVAzMk9YNTl5S0VzQ3E1T25HMm5mbDBvTThnTW8zODJIak9BbDdBSFlvUWNneWZRcEljOXVkQWVsTlFJSWd0ODQ2ZDA5ZVNpWkNvZlR0VFhrNkJ4TFNDb0N4cWwyS0toTTVQQ0JHQmRQcGFBX2pqX2NFSXIyR3V5UzhxUXBRSFBjQnRoTVBmWGtQbmJpTlJqRHNNRlp5bHJEMmZ3SHY2V0J2N1RENkRzcDJnajJ0ZWFNcU5qWFg3Sm5Mcmc5UGd3TnJheW5YWjNYaHhzTW1fdXV3WDVxTy1V?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Nacional / Global">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Univates recebe segunda edição do Nasa Space Apps Challenge em Lajeado - Folha do Mate</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Nacional / Global</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxOcXJqMXk1TVRQUGRDdTRlM3F5ZDZxaDVBQnpZNHFJZTFzeHhuSXR6WW1yOHhpWEhFSXJsZkNNVWw1el83bkRnblFaeUVJXzd5V3FnNlhEeFQ5TVd0eWk2RkhqeDNOREJRNGItaFVnN1MtRkxJZloxaXVPZFNXTUFPS1N0VmpldTBZQ1hpdkZYcE1oN0FOQURiSGlaRmZwZmJGMnVVZnlZNWNSVXpXVnI1dHVsSQ?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Nacional / Global">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Shell Eco-marathon 2026 abre inscrições para universitários - Portal ABC do ABC</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Nacional / Global</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5FaUw5Q3VVcDhHTmoyTHVFVG1PMkNhak5wZTFwaVU5UUNqdGt4eUMwWF9zSlB1TjV0YTZySVVIY2w0LXBSUS00QmpBZGU1bmc2Wi05b3h1WHVqTmUwQTN0aWVXb0t1dmtld3NlVktIWFAwVElQc2xSUA?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Nacional / Global">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Projeto de equipe brasileira vence como Melhor Conceito de Missão do Nasa Space Apps 2025 - GOV.BR</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Nacional / Global</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxQOWxrTmZqckU0ZHdKbjdCbU9vR1BTV0xoMzFGMTRWZi10SzVIaTdQY3pQWFA4V1UtUkFVVHl3QWhrN0dITlVvRjZLSzY1bjJHd0tiOU9oSXd3b3dheWxNR2s2M2p6V0tLNVhsLTFCRjg4UWgySTlicVc1bkdLMjB3b204MUo4VlJEVUJ5RlFkU2NjTVR6TlNTVWdvOWc4ekMwVXpZeVJoMW1uejJER3lkRUJWUnR2elRCY2lINjduT0Z2aTNlYmx3cElraG5CVS1sczJPeERmVWJROFR6N09MMXBpWkd6cnZ4?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Nacional / Global">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Univates recebe segunda edição do NASA Space Apps Challenge em Lajeado - Univates</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Nacional / Global</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNbjI4ei10V1Z6NTFIZmRWTW1KWkpTTmtTa0VNeURxM2ZtQ0FrdVYzLWNUNjV0Q2lHX3k5OEtVR0dRWG03SFNWRHNZb21ZQzV3dXJrRWFBMFE3M2ZUMWdkVmt2LUZNSkJIY3ZKLXRCQWtNemZfNlFzMThxaWlXc0tBekpxZHRLbjBZTmhZVURvRkN1TUpqdldtN1N6Sk5lalY2ZzFrT1d3?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Nacional / Global">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Sua equipe na Shell Eco-marathon 2026 - Promoview</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Nacional / Global</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE12bU15bW15SmNsR2p3VHlYVGhZRlBTMkJRU3VnMXlZZkdhWFd6c1Z0MW5RWkVyaFltc1h1TXNRSFlyUEx0Tjk1LUNDaDlyaHdrUnlPOUh6LVdnVE0?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Brasil">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Proenergia Summit 2026 abre inscrições para Hackathon com desafio voltado à transição energética - Blog do Eliomar</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Brasil</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxPblhmVGRxMFRSREhSRnRZUmluZ2wzWkswZ0FVMU41NEU1d2toYnZWcG9BUEZ2eGk1Um1MbTdXX0RNRVB1UmswdTBGTFh6YVpBMnAxcm55RTcwU1JiVEhuUVVmRF96YWlKZDNaYmJETWh0M1hROE03RTBQdDBUSnNhV3k5ZWRIR1dRdUp0Tmx0Rml1LUQybWdOOU9BbUMwQzl3QzNoOEpieUNWV0RFcldsZHczbjRYUWRILW9HdTgxYTk?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Brasil">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Pesquisador campista é finalista de hackathon para reduzir desperdício de energia - J3News</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Brasil</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxQTjcxS0tGeUpWUzF4MWQzbXBkbFhjTjVpMWcteFFLSnJzYjRjT1JzRWQxdnl0bXpiQkxTWFlwcHZ0dFJZRDB1dGRUU1pqX296TkFuU1ZodDhwYS1meGxyTjlKbm02eERyY0JjaExXUV9lcEg3M0Q0aW0wWmdUMjJWZzRpckc?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Brasil">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Hackathon de IA reúne 12 equipes para criar soluções para a transição energética - tmc.com.br</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Brasil</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxPQVZHWnhiYVNuTHkwbDQxQTV1VjZTcXV5MXhUVHp5RkZmMVppTTE2RUhLSTQ4NmdpOC1qd0MyTjBFQkJtbkd5a2NUT3pPMElON21ocnZfTVB5QTRsNzlpMjlTMzRfSm5nb2Q2aWl3MTZFa3dTUWg5U1lHWUZrV1JCcXhyU19wOTN6clFwUU9fV2tJVTBBVV9lQUh2cXpOWTZTQzdwbzJpbUJqbVk?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Brasil">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Portal UFS - Estudantes da UFS conquistam 3º lugar em maratona de inovação focada no setor elétrico - Portal UFS</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Brasil</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPU3Nuc1g0LXI3eUp0dmttSE1nVlFyc3JsTmx0NWh4bl9nVlBUdkZYSGwzNDlnVl9WaW9YM0RZQWtObFc3dFEyaEJiYlhXOTZvMnRSVnBiM1haTmIzUHFwbHc1bnQxTjMyTEZmZmwyMk5LMURHVThJazRlSG1rV21leEFIa1hWMmVuVEZHX1ROSDdHZmVjSXZlZW9YQWh5eU1NQUNBZVpIZld5cjg4QzExRlQ3QjF4aGZLMkhB?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Brasil">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Hackathon Mining Hub incentiva estudantes a criar soluções tecnológicas para gestão de dados geológicos - IBRAM - Mineração do Brasil</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Brasil</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNTFdtOEJqYXlCQXVuR21IUUJMNFp6TXQzT1o4Mi1WbWhMWVZaQW1uMjRBOUVlUTB1YzVCdDl1b2JBQVNiUGxsYmN2WmRScGxSX0lRTE9qT2xrQzFyMEpZTU5KdFVsNU9DMHRibURSS3ozSEFTYS1mWmxiTDVNZF9tX2tGaUw2NmdxamJ6Y2prMHNfRWxvM2k3b2I5bjlvUDdjZTFNNEpVQk52UlpLV0p0NnM0b0xjNmpnbG9xZGVTR2RMazZqUE5PQmYyTzJGdw?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Brasil">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Canoas sedia o Hackathon Cidades Sábias para desenvolver soluções urbanas durante o CONIPC Brasil 2026 - Brasil Inovador</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Brasil</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxPSlNiSWViSjRfaUVxN3V6d0Ywd0hEekg3eE5SREpVLXdEMXZ4MzhNSFhIMXhzZ0Q2UlcyVkx2STU0cW14SVowOXFOX0luYmV6TklkcGVIZFZlSFA2RFVJUi1OSElVVlNrVkw4c0lGM2VHTzVwOXdNUld1MThVcnBtMGc4ckdxS3duNi1xUTlzV1FfMmtFRU9wM3JQLUdxbDhBUzRBRzRhSTlXNXN4aVZZR1BCU2lHcE9lcmpxREV6UHZoNVM0NVN5bUJWRnNCQQ?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Brasil">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>PETRONAS Brasil lança o I Desafio de Inovação para promover projetos de Soluções Baseadas na Natureza (SBN) - TN Petróleo</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Brasil</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxOOFJvaDNIV2pnRkpiZkplUnozNkV1aWFzc1VabnZibFZyMjk1bWVkVXhDTEtiRmJPWERxMW95OFBPeEFwX1dIM0hFLWw1VTdla0lZY2VrSnBaYnJTX0N6TnN4QTFuZUV6RDNvYjJvTUoxb1hpRjg0c2xIT1hvU19aYVZHYUJXVzd5T1hVZU9OLWZ0Y3VPQXpaVnVIYzZzNlI2NVJNa0pNdWpJaHotMDd5Q3M1RUZwcVpsbkxGaWlRby02clN4TE5Ud05EOHVsVV84STdCZEM3VQ?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
+        </div>
+        
+        <div class="card" data-cat="Desafios & Hackathons" data-city="Online / Brasil">
+            <div class="card-top">
+                <span class="badge badge-desafio">Desafios & Hackathons</span>
+                <span class="date">20/11/2026</span>
+            </div>
+            <h3>Cemig visita ISI-ER para analisar possibilidades de parcerias e apresentar “Desafio de Inovação” - SENAI RN</h3>
+            <p class="empresa">Radar de Editais & Competições</p>
+            <ul class="detalhes">
+                <li><strong>📍 Local:</strong> Online / Brasil</li>
+                <li><strong>🎓 Requisito:</strong> Estudantes de Graduação</li>
+                <li><strong>💰 Bolsa/Prêmio:</strong> Bolsa / Premiação</li>
+            </ul>
+            <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQcUphVmhZUkFlSV91NnF6UEpCWHdTY0JUbDlUY084a1dYUHduQUZEVUFrdmRDdy1wN0sxUXhyRjFxaU1rdlp1azljbmFSVXNfbFExX2xhel9CTkZveVUzTktEMzluRXBxSWFPZDRMZzhUMDFacVZDUXBXVi1NN3ZLVG9seUk4Y3NBek1VQVdCNm5xVnBSMmpuMmVMV0dTY21MQXVhdDVKUDF0dTVxeXo3TE04cEE2STAyb01Z?oc=5" target="_blank" rel="noopener" class="btn">Acessar Edital / Desafio →</a>
         </div>
         
         </div>
     </div>
 
     <script>
-        function filtrar(categoria, btn) {
-            document.querySelectorAll('.filtros button').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        let catAtual = 'todas';
+        let cityAtual = 'todas';
+
+        function aplicarFiltros() {
             document.querySelectorAll('.card').forEach(card => {
-                if (categoria === 'todas' || card.dataset.cat === categoria) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                const matchCat = (catAtual === 'todas' || card.dataset.cat === catAtual);
+                const matchCity = (cityAtual === 'todas' || card.dataset.city.includes(cityAtual));
+                card.style.display = (matchCat && matchCity) ? 'flex' : 'none';
             });
+        }
+
+        function setCat(cat, btn) {
+            catAtual = cat;
+            document.querySelectorAll('#filtro-cat button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            aplicarFiltros();
+        }
+
+        function setCity(city, btn) {
+            cityAtual = city;
+            document.querySelectorAll('#filtro-city button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            aplicarFiltros();
         }
     </script>
 </body>
