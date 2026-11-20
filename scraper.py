@@ -29,21 +29,26 @@ IGNORAR = [
     "facebook", "instagram", "youtube", "bluesky", "twitter", "x.com",
     "linkedin.com/company", "socioambiental", "cultural", "investidor",
     "logo", "imprensa", "ouvidoria", "fale conosco", "politica de privacidade",
-    "acessibilidade", "mapa do site", "login", "entrar"
+    "acessibilidade", "mapa do site", "login", "entrar", "esqueci minha senha"
 ]
 
-# Órgãos Públicos, Tribunais e Centros de Pesquisa no RJ / Baixada
+# Órgãos Públicos (Federal, Estadual RJ, Prefeituras Rio e Caxias) e Agentes Integradores
 FONTES_ORGAOS_PUBLICOS = [
     {"nome": "TRF2 (Tribunal Regional Federal 2ª Região)", "url": "https://www.trf2.jus.br/trf2/institucional/estagio", "cidade": "Rio de Janeiro - RJ (Centro)"},
     {"nome": "TJRJ (Tribunal de Justiça RJ)", "url": "https://www.tjrj.jus.br/web/guest/institucional/estagio", "cidade": "Rio de Janeiro - RJ"},
     {"nome": "TRT-1 (Tribunal Regional do Trabalho RJ)", "url": "https://www.trt1.jus.br/web/guest/estagio", "cidade": "Rio de Janeiro - RJ"},
+    {"nome": "Governo do Estado RJ (Trabalho e Estágio)", "url": "https://www.rj.gov.br/cidadao/servicos/trabalho-e-estagio/categoria/20", "cidade": "Rio de Janeiro - RJ"},
+    {"nome": "CGE-RJ (Controladoria Geral do Estado)", "url": "https://cge.rj.gov.br/programa-de-estagio/", "cidade": "Rio de Janeiro - RJ (Centro)"},
+    {"nome": "Prefeitura do Rio (IplanRio / Órgãos Municipais)", "url": "https://iplanrio.prefeitura.rio/", "cidade": "Rio de Janeiro - RJ"},
+    {"nome": "Prefeitura de Duque de Caxias", "url": "https://portal.duquedecaxias.rj.gov.br/", "cidade": "Duque de Caxias - RJ"},
     {"nome": "INMETRO (Campus Xerém)", "url": "https://www.gov.br/inmetro/pt-br/acesso-a-informacao/servidores/estagio", "cidade": "Duque de Caxias - RJ (Xerém)"},
     {"nome": "Fiocruz (Manguinhos)", "url": "https://portal.fiocruz.br/estagio", "cidade": "Rio de Janeiro - RJ (Manguinhos)"},
     {"nome": "CEPEL (Pesquisa de Energia Elétrica)", "url": "https://www.cepel.br/trabalhe-conosco/", "cidade": "Rio de Janeiro - RJ (Ilha do Fundão)"},
     {"nome": "EPE (Empresa de Pesquisa Energética)", "url": "https://www.epe.gov.br/pt/a-epe/trabalhe-na-epe", "cidade": "Rio de Janeiro - RJ (Centro)"},
     {"nome": "Petrobras Carreiras", "url": "https://petrobras.com.br/quem-somos/carreiras", "cidade": "Rio de Janeiro / Duque de Caxias"},
-    {"nome": "Portal CIEE (Editais Públicos)", "url": "https://portal.ciee.org.br/processos-seletivos-especiais/", "cidade": "Rio de Janeiro - RJ"},
-    {"nome": "Portal MUDES (Estágios RJ)", "url": "https://www.mudes.org.br/", "cidade": "Rio de Janeiro / Baixada"}
+    {"nome": "CIEE (Processos Seletivos Públicos)", "url": "https://portal.ciee.org.br/processos-seletivos-especiais/", "cidade": "Rio de Janeiro - RJ"},
+    {"nome": "MUDES (Estágios RJ)", "url": "https://www.mudes.org.br/", "cidade": "Rio de Janeiro / Baixada"},
+    {"nome": "ISBET (Parceiro Governo RJ)", "url": "https://isbet.org.br/", "cidade": "Rio de Janeiro - RJ"}
 ]
 
 # Empresas Privadas / Mistas de Energia, Óleo & Gás e Indústria no RJ e Caxias
@@ -82,7 +87,6 @@ def formatar_cidade(texto_local):
 def extrair_metadados(texto_completo):
     limpo = BeautifulSoup(texto_completo or "", "html.parser").get_text(" ", strip=True)
 
-    # Busca valor de bolsa-auxílio
     match_sal = re.search(
         r"(?:bolsa[\s\-auxílio]*|remuneração|salário|valor)?\s*(R\$\s*\d{1,3}(?:\.\d{3})*(?:,\d{2})?(?:\s*(?:a|até|\-)\s*R\$\s*\d{1,3}(?:\.\d{3})*(?:,\d{2})?)?)",
         limpo,
@@ -90,7 +94,6 @@ def extrair_metadados(texto_completo):
     )
     salario = match_sal.group(1).strip() if match_sal else "Consultar no edital"
 
-    # Busca período mínimo
     match_per = re.search(
         r"((?:a partir do\s*)?\d{1,2}[º°o]\s*(?:ao\s*\d{1,2}[º°o]\s*)?(?:período|periodo|semestre))",
         limpo,
@@ -99,6 +102,42 @@ def extrair_metadados(texto_completo):
     periodo = match_per.group(1).strip().capitalize() if match_per else "Consultar no edital"
 
     return salario, periodo
+
+
+def buscar_nube_mecanica():
+    """Captura vagas públicas de Engenharia Mecânica no Nube filtrando pelas 4 cidades do RJ"""
+    resultados = []
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+    hoje = datetime.now().strftime("%d/%m/%Y")
+    url_nube = "https://www.nube.com.br/vagas-de-estagio/engenharia-mecanica"
+
+    try:
+        resp = requests.get(url_nube, headers=headers, timeout=15)
+        if resp.status_code == 200:
+            soup = BeautifulSoup(resp.text, "html.parser")
+            for a in soup.find_all("a", href=True):
+                href = a["href"]
+                if "/detalhes-vaga/" in href:
+                    bloco_texto = a.get_text(" | ", strip=True)
+                    norm = normalizar(f"{bloco_texto} {href}")
+                    if cidade_valida(norm):
+                        link_completo = href if href.startswith("http") else f"https://www.nube.com.br{href}"
+                        salario, periodo = extrair_metadados(bloco_texto)
+                        cidade_fmt = formatar_cidade(norm)
+                        resultados.append({
+                            "categoria": "Agentes (Nube / MUDES / CIEE)",
+                            "titulo": bloco_texto[:120],
+                            "empresa": "Nube — Estágio Eng. Mecânica",
+                            "local": cidade_fmt,
+                            "periodo": periodo,
+                            "salario": salario,
+                            "link": link_completo,
+                            "data": hoje
+                        })
+    except Exception as e:
+        print(f"Aviso Nube: {e}")
+
+    return resultados
 
 
 def buscar_orgaos_publicos():
@@ -147,10 +186,11 @@ def buscar_orgaos_publicos():
 
 
 def buscar_radar_editais_web():
+    """Varre avisos públicos recentes de editais no RJ (TRF2, Governo RJ, Prefeituras, Solar, Eólica)"""
     resultados = []
     hoje = datetime.now().strftime("%d/%m/%Y")
     consultas = [
-        '"estágio" "engenharia mecânica" ("TRF2" OR "Petrobras" OR "INMETRO" OR "Rio de Janeiro")',
+        '"estágio" "engenharia mecânica" ("TRF2" OR "Governo do Estado" OR "Prefeitura do Rio" OR "Duque de Caxias" OR "Petrobras")',
         '"estágio" ("energia solar" OR "energia eólica" OR "energias renováveis") "Rio de Janeiro"'
     ]
 
@@ -258,7 +298,15 @@ def gerar_html(vagas):
 
     for v in vagas:
         cat = v["categoria"]
-        badge_class = "badge-estatal" if "Órgãos" in cat else ("badge-energia" if "Solar" in cat else "badge-ind")
+        if "Órgãos" in cat:
+            badge_class = "badge-estatal"
+        elif "Solar" in cat:
+            badge_class = "badge-energia"
+        elif "Agentes" in cat:
+            badge_class = "badge-agente"
+        else:
+            badge_class = "badge-ind"
+
         cards_html += f"""
         <div class="card" data-cat="{cat}" data-city="{v['local']}">
             <div class="card-top">
@@ -288,7 +336,7 @@ def gerar_html(vagas):
     <style>
         :root {{ --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #94a3b8; --accent: #38bdf8; }}
         body {{ font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }}
-        .container {{ max-width: 1120px; margin: 0 auto; }}
+        .container {{ max-width: 1140px; margin: 0 auto; }}
         header {{ border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 20px; }}
         h1 {{ margin: 0 0 6px 0; font-size: 1.6rem; color: var(--accent); }}
         .sub {{ color: var(--muted); font-size: 0.9rem; margin: 0; }}
@@ -305,6 +353,7 @@ def gerar_html(vagas):
         .badge {{ padding: 4px 10px; border-radius: 12px; font-weight: 700; }}
         .badge-estatal {{ background: #fef08a; color: #854d0e; }}
         .badge-energia {{ background: #bbf7d0; color: #166534; }}
+        .badge-agente {{ background: #e9d5ff; color: #6b21a8; }}
         .badge-ind {{ background: #bae6fd; color: #075985; }}
         .date {{ color: var(--muted); }}
         h3 {{ margin: 0 0 4px 0; font-size: 1.02rem; line-height: 1.35; }}
@@ -321,21 +370,23 @@ def gerar_html(vagas):
             <p class="sub">Foco: Rio de Janeiro, Duque de Caxias, Nova Iguaçu e Belford Roxo | Atualizado em {atualizacao}</p>
         </header>
 
-        <div class="secao-titulo">Acesso Rápido — Órgãos Públicos & Busca Filtrada</div>
+        <div class="secao-titulo">Portais Públicos & Agentes Integradores (1 Clique)</div>
         <div class="atalhos">
             <a href="https://www.trf2.jus.br/trf2/institucional/estagio" target="_blank">⚖️ TRF2 Estágios</a>
-            <a href="https://www.gov.br/inmetro/pt-br/acesso-a-informacao/servidores/estagio" target="_blank">🏛️ INMETRO (Xerém)</a>
+            <a href="https://www.rj.gov.br/cidadao/servicos/trabalho-e-estagio/categoria/20" target="_blank">🏛️ Governo do Estado RJ</a>
+            <a href="https://www.nube.com.br/vagas-de-estagio/engenharia-mecanica" target="_blank">🎓 Nube (Eng. Mecânica)</a>
+            <a href="https://www.mudes.org.br/" target="_blank">📋 MUDES (Portal RJ)</a>
+            <a href="https://portal.ciee.org.br/processos-seletivos-especiais/" target="_blank">📋 CIEE (Editais Públicos)</a>
+            <a href="https://www.superestagios.com.br/vagas/duque-de-caxias" target="_blank">🏭 Super Estágios (Caxias)</a>
+            <a href="https://www.gov.br/inmetro/pt-br/acesso-a-informacao/servidores/estagio" target="_blank">🔬 INMETRO (Xerém)</a>
             <a href="https://www.cepel.br/trabalhe-conosco/" target="_blank">⚡ CEPEL (Fundão)</a>
-            <a href="https://www.epe.gov.br/pt/a-epe/trabalhe-na-epe" target="_blank">⚡ EPE (Centro RJ)</a>
-            <a href="https://www.linkedin.com/jobs/search/?keywords=estagio%20engenharia%20mecanica%20energia%20solar%20eolica&location=Rio%20de%20Janeiro%2C%20Brasil" target="_blank">☀️ LinkedIn Solar/Eólica RJ</a>
-            <a href="https://www.linkedin.com/jobs/search/?keywords=estagio%20engenharia%20mecanica&location=Duque%20de%20Caxias%2C%20Rio%20de%20Janeiro%2C%20Brasil" target="_blank">🏭 LinkedIn Duque de Caxias</a>
-            <a href="https://www.linkedin.com/jobs/search/?keywords=estagio%20engenharia%20mecanica&location=Nova%20Igua%C3%A7u%2C%20Rio%20de%20Janeiro%2C%20Brasil" target="_blank">🏭 LinkedIn Nova Iguaçu</a>
         </div>
 
         <div class="secao-titulo">Filtrar por Área</div>
         <div class="filtros" id="filtro-cat">
             <button class="active" onclick="setCat('todas', this)">Todas ({len(vagas)})</button>
             <button onclick="setCat('Órgãos Públicos & Estatais', this)">Órgãos Públicos & Estatais</button>
+            <button onclick="setCat('Agentes (Nube / MUDES / CIEE)', this)">Agentes (Nube / MUDES / CIEE)</button>
             <button onclick="setCat('Energia Solar & Eólica', this)">Energia Solar & Eólica</button>
             <button onclick="setCat('Indústria & Engenharia', this)">Indústria & Engenharia</button>
         </div>
@@ -397,7 +448,12 @@ def main():
             antigas = []
 
     links_antigos = {v["link"] for v in antigas}
-    vagas = buscar_orgaos_publicos() + buscar_radar_editais_web() + buscar_gupy_rj()
+    vagas = (
+        buscar_orgaos_publicos()
+        + buscar_nube_mecanica()
+        + buscar_radar_editais_web()
+        + buscar_gupy_rj()
+    )
 
     vistos = set()
     unicas = []
