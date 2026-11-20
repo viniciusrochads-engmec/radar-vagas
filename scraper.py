@@ -1,4 +1,5 @@
 import json
+import os
 import re
 import urllib.parse
 import xml.etree.ElementTree as ET
@@ -14,7 +15,7 @@ CIDADES_PERMITIDAS = [
     "belford roxo", "nova iguacu"
 ]
 
-# Palavras-chave técnicas alinhadas ao seu perfil (Mecânica + Energia + Sistemas Térmicos/Prediais)
+# Palavras-chave técnicas (Eng. Mecânica + Energia Solar/Eólica + Sistemas Térmicos/Prediais)
 TERMOS_AREA = [
     "engenharia mecanica", "eng. mecanica", "mecanica", "mechanical",
     "energia solar", "fotovoltaica", "energia eolica", "eolica", "wind",
@@ -117,7 +118,6 @@ def buscar_orgaos_publicos():
                     base = "/".join(fonte["url"].split("/")[:3])
                     href = base + href
 
-                # Filtra links reais de editais, seleções ou vagas de engenharia
                 eh_relevante = any(t in norm for t in [
                     "estagio", "edital", "processo seletivo", "selecao",
                     "engenharia", "mecanica", "inscricoes", "vagas", "resultado"
@@ -147,7 +147,6 @@ def buscar_orgaos_publicos():
 
 
 def buscar_radar_editais_web():
-    """Varre avisos públicos recentes de editais no RJ (TRF2, Petrobras, Solar, Eólica, Eng. Mecânica)"""
     resultados = []
     hoje = datetime.now().strftime("%d/%m/%Y")
     consultas = [
@@ -223,6 +222,34 @@ def buscar_gupy_rj():
             print(f"Aviso Gupy ({empresa}): {e}")
 
     return resultados
+
+
+def enviar_telegram(novas_vagas):
+    token = os.environ.get("TELEGRAM_TOKEN")
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID")
+    if not token or not chat_id or not novas_vagas:
+        return
+
+    for v in novas_vagas[:10]:
+        titulo_limpo = v["titulo"].replace("*", "").replace("_", "").replace("[", "(").replace("]", ")")
+        mensagem = (
+            f"🚨 *Nova Oportunidade no Radar!*\n\n"
+            f"📌 *{titulo_limpo}*\n"
+            f"🏢 {v['empresa']}\n"
+            f"📍 {v['local']}\n"
+            f"🎓 Período: {v['periodo']}\n"
+            f"💰 Bolsa: {v['salario']}\n\n"
+            f"🔗 [Acessar Edital / Vaga]({v['link']})"
+        )
+        url = f"https://api.telegram.org/bot{token}/sendMessage"
+        try:
+            requests.post(
+                url,
+                json={"chat_id": chat_id, "text": mensagem, "parse_mode": "Markdown"},
+                timeout=10
+            )
+        except Exception as e:
+            print(f"Erro ao enviar Telegram: {e}")
 
 
 def gerar_html(vagas):
@@ -361,20 +388,33 @@ def gerar_html(vagas):
 
 
 def main():
+    antigas = []
+    if os.path.exists(ARQUIVO_DADOS):
+        try:
+            with open(ARQUIVO_DADOS, "r", encoding="utf-8") as f:
+                antigas = json.load(f)
+        except Exception:
+            antigas = []
+
+    links_antigos = {v["link"] for v in antigas}
     vagas = buscar_orgaos_publicos() + buscar_radar_editais_web() + buscar_gupy_rj()
 
     vistos = set()
     unicas = []
+    ineditas = []
     for v in vagas:
         if v["link"] not in vistos:
             vistos.add(v["link"])
             unicas.append(v)
+            if v["link"] not in links_antigos:
+                ineditas.append(v)
 
     with open(ARQUIVO_DADOS, "w", encoding="utf-8") as f:
         json.dump(unicas, f, ensure_ascii=False, indent=2)
 
     gerar_html(unicas)
-    print(f"Concluído! {len(unicas)} vagas encontradas.")
+    enviar_telegram(ineditas)
+    print(f"Concluído! {len(unicas)} vagas no site ({len(ineditas)} novas enviadas ao Telegram).")
 
 
 if __name__ == "__main__":
