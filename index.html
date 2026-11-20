@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar de Estágios | Engenharia & Energia</title>
+    <style>
+        :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #94a3b8; --accent: #38bdf8; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 1050px; margin: 0 auto; }
+        header { border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 24px; }
+        h1 { margin: 0 0 6px 0; font-size: 1.7rem; color: var(--accent); }
+        .sub { color: var(--muted); font-size: 0.9rem; margin: 0; }
+        .atalhos { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+        .atalhos a { background: #1e293b; border: 1px solid #334155; color: #e2e8f0; padding: 8px 14px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; }
+        .atalhos a:hover { border-color: var(--accent); color: var(--accent); }
+        .filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        button { background: var(--card); color: var(--text); border: 1px solid #475569; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+        button.active, button:hover { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .card { background: var(--card); border: 1px solid #334155; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.78rem; }
+        .badge { padding: 4px 10px; border-radius: 12px; font-weight: 700; }
+        .badge-estatal { background: #fef08a; color: #854d0e; }
+        .badge-renovavel { background: #bbf7d0; color: #166534; }
+        .badge-intl { background: #bae6fd; color: #075985; }
+        .date { color: var(--muted); }
+        h3 { margin: 0 0 8px 0; font-size: 1.05rem; line-height: 1.4; }
+        .meta { color: var(--muted); font-size: 0.88rem; margin: 0 0 16px 0; }
+        .btn { display: inline-block; text-align: center; background: #0284c7; color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+        .btn:hover { background: #0369a1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Radar Pessoal de Estágios — Engenharia & Energia</h1>
+            <p class="sub">Última varredura automática: 20/11/2026 às 19:41 (UTC) | Total monitorado: 11 oportunidades</p>
+        </header>
+
+        <div class="atalhos">
+            <a href="https://petrobras.com.br/quem-somos/carreiras" target="_blank">🔎 Petrobras Carreiras</a>
+            <a href="https://portal.ciee.org.br/processos-seletivos-especiais/" target="_blank">🔎 Editais CIEE</a>
+            <a href="https://www.epe.gov.br/pt/a-epe/trabalhe-na-epe" target="_blank">🔎 EPE Energia</a>
+            <a href="https://www.mudes.org.br/" target="_blank">🔎 Portal MUDES</a>
+            <a href="https://www.linkedin.com/jobs/search/?keywords=estagio%20engenharia%20energia%20renovavel&location=Brasil" target="_blank">🔎 LinkedIn Renováveis</a>
+            <a href="https://www.euraxess.ec.europa.eu/jobs/search" target="_blank">🔎 Europa / Euraxess</a>
+        </div>
+
+        <div class="filtros">
+            <button class="active" onclick="filtrar('todas', this)">Todas (11)</button>
+            <button onclick="filtrar('Estatais & Editais', this)">Estatais & Editais</button>
+            <button onclick="filtrar('Energias Renováveis', this)">Energias Renováveis</button>
+            <button onclick="filtrar('Internacional Remoto', this)">Internacional Remoto</button>
+        </div>
+
+        <div class="grid" id="lista-vagas">
+            
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Programa Petrobras Socioambiental</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://petrobras.com.br/sustentabilidade/socioambiental" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Petrobras Cultural</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://petrobras.com.br/sustentabilidade/cultural" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Time Petrobras</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://petrobras.com.br/sustentabilidade/time-petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Empresas do Sistema Petrobras</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://petrobras.com.br/quem-somos/participacoes-societarias" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Página inicial Petrobras Logo Petrobras</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://petrobras.com.br" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Página da Petrobras no Bluesky</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://bsky.app/profile/petrobras.com.br" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Página da Petrobras no Facebook</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://www.threads.net/@petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Página da Petrobras no Instagram</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://www.facebook.com/petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Página da Petrobras no Youtube</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://instagram.com/petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Página da Petrobras no LinkedIn</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://www.tiktok.com/@petrobras" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        <div class="card" data-cat="Estatais & Editais">
+            <div class="card-top">
+                <span class="badge badge-estatal">Estatais & Editais</span>
+                <span class="date">Capturada em 20/11/2026</span>
+            </div>
+            <h3>Investidor Petrobras</h3>
+            <p class="meta"><strong>Petrobras Carreiras</strong> • Brasil / RJ</p>
+            <a href="https://investidorpetrobras.com.br/" target="_blank" rel="noopener" class="btn">Acessar Vaga / Edital →</a>
+        </div>
+        
+        </div>
+    </div>
+
+    <script>
+        function filtrar(categoria, btn) {
+            document.querySelectorAll('.filtros button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.card').forEach(card => {
+                if (categoria === 'todas' || card.dataset.cat === categoria) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
