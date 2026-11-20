@@ -9,23 +9,19 @@ from bs4 import BeautifulSoup
 
 ARQUIVO_DADOS = "vagas.json"
 
-# Cidades permitidas para estágios presenciais/híbridos
 CIDADES_ESTAGIO = [
     "rio de janeiro", "duque de caxias", "xerem",
     "belford roxo", "nova iguacu"
 ]
 
-# Anos antigos para descartar editais/desafios expirados
 ANOS_EXPIRADOS = ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"]
 
-# Palavras que indicam processo já encerrado
 TERMOS_ENCERRADOS = [
     "resultado final", "resultado preliminar", "homologacao", "homologação",
     "inscricoes encerradas", "inscrições encerradas", "gabarito", "convocacao",
     "convocação", "classificacao final", "classificação final", "errata"
 ]
 
-# Palavras-chave técnicas (Eng. Mecânica + Energia Solar/Eólica + Sistemas Térmicos)
 TERMOS_AREA = [
     "engenharia mecanica", "eng. mecanica", "mecanica", "mechanical",
     "energia solar", "fotovoltaica", "energia eolica", "eolica", "wind",
@@ -41,7 +37,6 @@ IGNORAR_LINKS = [
     "acessibilidade", "mapa do site", "login", "entrar", "esqueci minha senha"
 ]
 
-# Órgãos Públicos e Agentes Integradores (RJ & Baixada)
 FONTES_ORGAOS_PUBLICOS = [
     {"nome": "TRF2 (Tribunal Regional Federal 2ª Região)", "url": "https://www.trf2.jus.br/trf2/institucional/estagio", "cidade": "Rio de Janeiro - RJ (Centro)"},
     {"nome": "TJRJ (Tribunal de Justiça RJ)", "url": "https://www.tjrj.jus.br/web/guest/institucional/estagio", "cidade": "Rio de Janeiro - RJ"},
@@ -57,7 +52,6 @@ FONTES_ORGAOS_PUBLICOS = [
     {"nome": "MUDES (Estágios RJ)", "url": "https://www.mudes.org.br/", "cidade": "Rio de Janeiro / Baixada"}
 ]
 
-# Fontes de Bolsas e Fomento (CEFET/UFCIRJ, FAPERJ, CNPq)
 FONTES_BOLSAS = [
     {"nome": "CEFET/RJ (UFCIRJ) — Editais Abertos", "url": "https://www.cefet-rj.br/index.php/editais-e-processos-seletivos", "cidade": "Rio de Janeiro / Nova Iguaçu"},
     {"nome": "DIPPG CEFET/RJ — PIBIC, Pesquisa e Eventos", "url": "https://dippg.cefet-rj.br/", "cidade": "CEFET/RJ (UFCIRJ)"},
@@ -71,7 +65,6 @@ EMPRESAS_GUPY = [
     "eletrobras", "light", "naturgy", "subsea7", "technipfmc", "modec"
 ]
 
-# Catálogo Curado de Cursos Gratuitos com Certificado (Lattes & Formação Técnica)
 CURSOS_CERTIFICADOS = [
     {
         "area_curso": "CAD / CAE / Simulação",
@@ -102,7 +95,7 @@ CURSOS_CERTIFICADOS = [
         "titulo": "Cursos Gratuitos do ITA — Controle, Programação e Engenharia",
         "instituicao": "ITA — Instituto Tecnológico de Aeronáutica (via Coursera)",
         "modalidade": "EAD • Gratuito (Opção Ouvinte / Auxílio Financeiro)",
-        "descricao": "Cursos ministrados por professores do ITA (Orientação a Objetos com Java, Controle de Sistemas, Métodos Ágeis).",
+        "descricao": "Cursos ministrados por professores do ITA (Orientação a Objetos, Controle de Sistemas, Métodos Ágeis).",
         "link": "https://www.coursera.org/ita"
     },
     {
@@ -505,7 +498,7 @@ def enviar_telegram(novas_vagas):
 def gerar_html(itens):
     atualizacao = datetime.now().strftime("%d/%m/%Y às %H:%M")
 
-    cards_oportunidades = ""
+    cards_oportunidades = []
     for v in itens:
         cat = v["categoria"]
         aba = v["aba"]
@@ -522,37 +515,390 @@ def gerar_html(itens):
         else:
             badge_class = "pill-blue"
 
-        cards_oportunidades += f"""
-        <article class="glass-card item-dinamico" data-aba="{aba}" data-cat="{cat}" data-city="{v['local']}">
-            <div class="card-header">
-                <span class="glass-pill {badge_class}">{cat}</span>
-                <span class="card-date">{v['data']}</span>
-            </div>
-            <h3 class="card-title">{v['titulo']}</h3>
-            <p class="card-subtitle">{v['empresa']}</p>
-            <div class="spec-box">
-                <div class="spec-row"><span class="spec-label">Local</span><span class="spec-val">{v['local']}</span></div>
-                <div class="spec-row"><span class="spec-label">Prazo</span><span class="spec-val highlight-prazo">{v['prazo']}</span></div>
-                <div class="spec-row"><span class="spec-label">Requisito</span><span class="spec-val">{v['periodo']}</span></div>
-                <div class="spec-row"><span class="spec-label">Bolsa / Prêmio</span><span class="spec-val">{v['salario']}</span></div>
-            </div>
-            <a href="{v['link']}" target="_blank" rel="noopener" class="apple-btn">
-                <span>Abrir Edital / Inscrição</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-            </a>
-        </article>
-        """
+        cards_oportunidades.append(
+            f'<article class="glass-card item-dinamico" data-aba="{aba}" data-cat="{cat}" data-city="{v["local"]}">'
+            f'<div class="card-header"><span class="glass-pill {badge_class}">{cat}</span><span class="card-date">{v["data"]}</span></div>'
+            f'<h3 class="card-title">{v["titulo"]}</h3>'
+            f'<p class="card-subtitle">{v["empresa"]}</p>'
+            f'<div class="spec-box">'
+            f'<div class="spec-row"><span class="spec-label">Local</span><span class="spec-val">{v["local"]}</span></div>'
+            f'<div class="spec-row"><span class="spec-label">Prazo</span><span class="spec-val highlight-prazo">{v["prazo"]}</span></div>'
+            f'<div class="spec-row"><span class="spec-label">Requisito</span><span class="spec-val">{v["periodo"]}</span></div>'
+            f'<div class="spec-row"><span class="spec-label">Bolsa / Prêmio</span><span class="spec-val">{v["salario"]}</span></div>'
+            f'</div>'
+            f'<a href="{v["link"]}" target="_blank" rel="noopener" class="apple-btn"><span>Abrir Edital / Inscrição</span> ↗</a>'
+            f'</article>'
+        )
 
-    if not cards_oportunidades:
-        cards_oportunidades = "<div class='glass-card vazio'>Nenhuma oportunidade nova aberta capturada nesta rodada. Utilize os atalhos diretos no dock acima.</div>"
+    html_oportunidades = "\n".join(cards_oportunidades) if cards_oportunidades else '<div class="glass-card vazio">Nenhuma oportunidade nova aberta capturada nesta rodada. Utilize os atalhos diretos no dock acima.</div>'
 
-    cards_cursos = ""
+    cards_cursos = []
     for c in CURSOS_CERTIFICADOS:
-        cards_cursos += f"""
-        <article class="glass-card card-curso" data-curso-area="{c['area_curso']}">
-            <div class="card-header">
-                <span class="glass-pill pill-teal">{c['area_curso']}</span>
-                <span class="card-date">Certificado Lattes</span>
+        cards_cursos.append(
+            f'<article class="glass-card card-curso" data-curso-area="{c["area_curso"]}">'
+            f'<div class="card-header"><span class="glass-pill pill-teal">{c["area_curso"]}</span><span class="card-date">Certificado Lattes</span></div>'
+            f'<h3 class="card-title">{c["titulo"]}</h3>'
+            f'<p class="card-subtitle">{c["instituicao"]}</p>'
+            f'<div class="spec-box">'
+            f'<div class="spec-row"><span class="spec-label">Modalidade</span><span class="spec-val">{c["modalidade"]}</span></div>'
+            f'<div class="spec-desc">{c["descricao"]}</div>'
+            f'</div>'
+            f'<a href="{c["link"]}" target="_blank" rel="noopener" class="apple-btn btn-emerald"><span>Acessar Plataforma Oficial</span> ↗</a>'
+            f'</article>'
+        )
+
+    html_cursos = "\n".join(cards_cursos)
+
+    pagina = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Engenharia Mecânica • Apple Glass Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {{
+            --bg-base: #070b14;
+            --text-primary: rgba(255, 255, 255, 0.94);
+            --text-secondary: rgba(255, 255, 255, 0.62);
+            --text-tertiary: rgba(255, 255, 255, 0.42);
+            --glass-bg: rgba(255, 255, 255, 0.055);
+            --glass-bg-hover: rgba(255, 255, 255, 0.09);
+            --glass-border: rgba(255, 255, 255, 0.14);
+            --glass-highlight: rgba(255, 255, 255, 0.28);
+            --spec-bg: rgba(0, 0, 0, 0.28);
+            --shadow-glass: 0 20px 40px -15px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+            --accent-blue: #0a84ff;
+            --accent-blue-hover: #409cff;
+            --orb-1: rgba(10, 132, 255, 0.34);
+            --orb-2: rgba(94, 92, 230, 0.28);
+            --orb-3: rgba(48, 209, 88, 0.20);
+        }}
+        body.light-mode {{
+            --bg-base: #eef2f8;
+            --text-primary: rgba(15, 23, 42, 0.92);
+            --text-secondary: rgba(15, 23, 42, 0.64);
+            --text-tertiary: rgba(15, 23, 42, 0.45);
+            --glass-bg: rgba(255, 255, 255, 0.62);
+            --glass-bg-hover: rgba(255, 255, 255, 0.82);
+            --glass-border: rgba(255, 255, 255, 0.75);
+            --glass-highlight: rgba(255, 255, 255, 0.95);
+            --spec-bg: rgba(241, 245, 249, 0.68);
+            --shadow-glass: 0 18px 36px -14px rgba(15, 23, 42, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+            --accent-blue: #007aff;
+            --accent-blue-hover: #0062cc;
+            --orb-1: rgba(0, 122, 255, 0.22);
+            --orb-2: rgba(88, 86, 214, 0.18);
+            --orb-3: rgba(52, 199, 89, 0.18);
+        }}
+        * {{ box-sizing: border-box; -webkit-font-smoothing: antialiased; }}
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 28px 20px 60px;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }}
+        .ambient-canvas {{ position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }}
+        .orb {{ position: absolute; border-radius: 50%; filter: blur(95px); animation: floatOrb 18s ease-in-out infinite alternate; }}
+        .orb-1 {{ width: 520px; height: 520px; background: var(--orb-1); top: -120px; left: -80px; }}
+        .orb-2 {{ width: 480px; height: 480px; background: var(--orb-2); top: 25%; right: -100px; animation-delay: -6s; }}
+        .orb-3 {{ width: 460px; height: 460px; background: var(--orb-3); bottom: -140px; left: 30%; animation-delay: -12s; }}
+        @keyframes floatOrb {{ 0% {{ transform: translate(0, 0) scale(1); }} 100% {{ transform: translate(35px, 28px) scale(1.08); }} }}
+        .container {{ max-width: 1180px; margin: 0 auto; }}
+        .hero-glass {{
+            background: var(--glass-bg);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-glass);
+            border-radius: 26px;
+            padding: 26px 30px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }}
+        .hero-badge {{
+            display: inline-flex; align-items: center; gap: 7px; font-size: 0.76rem; font-weight: 600;
+            letter-spacing: 0.03em; text-transform: uppercase; color: var(--accent-blue);
+            background: rgba(10, 132, 255, 0.14); border: 1px solid rgba(10, 132, 255, 0.3);
+            padding: 5px 12px; border-radius: 999px; margin-bottom: 10px;
+        }}
+        .pulse-dot {{ width: 7px; height: 7px; border-radius: 50%; background: #30d158; box-shadow: 0 0 10px #30d158; }}
+        h1 {{ margin: 0 0 6px 0; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.025em; }}
+        .hero-sub {{ margin: 0; color: var(--text-secondary); font-size: 0.92rem; line-height: 1.45; }}
+        .theme-toggle {{
+            background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary);
+            padding: 10px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600;
+            cursor: pointer; backdrop-filter: blur(16px); transition: all 0.25s ease;
+        }}
+        .theme-toggle:hover {{ background: var(--glass-bg-hover); transform: translateY(-1px); }}
+        .segmented-bar {{
+            display: flex; flex-wrap: wrap; gap: 6px; background: var(--glass-bg);
+            backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid var(--glass-border); padding: 6px; border-radius: 18px;
+            margin-bottom: 24px; box-shadow: var(--shadow-glass);
+        }}
+        .tab-btn {{
+            flex: 1 1 auto; background: transparent; color: var(--text-secondary);
+            border: 1px solid transparent; padding: 11px 16px; border-radius: 13px;
+            font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.25s ease; white-space: nowrap;
+        }}
+        .tab-btn:hover {{ color: var(--text-primary); background: rgba(255, 255, 255, 0.05); }}
+        .tab-btn.active {{
+            background: var(--glass-bg-hover); color: var(--text-primary);
+            border-color: var(--glass-highlight); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+        }}
+        .section-label {{
+            font-size: 0.76rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.06em; color: var(--text-tertiary); margin: 18px 0 10px 4px;
+        }}
+        .dock-links {{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }}
+        .dock-links a {{
+            background: var(--glass-bg); backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%); border: 1px solid var(--glass-border);
+            color: var(--text-primary); padding: 8px 14px; border-radius: 12px;
+            text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: all 0.22s ease;
+        }}
+        .dock-links a:hover {{ background: var(--glass-bg-hover); border-color: var(--glass-highlight); transform: translateY(-2px); }}
+        .filter-row {{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }}
+        .filter-pill {{
+            background: var(--glass-bg); color: var(--text-secondary); border: 1px solid var(--glass-border);
+            padding: 7px 15px; border-radius: 999px; font-size: 0.82rem; font-weight: 600;
+            cursor: pointer; backdrop-filter: blur(16px); transition: all 0.2s ease;
+        }}
+        .filter-pill:hover {{ color: var(--text-primary); background: var(--glass-bg-hover); }}
+        .filter-pill.active {{
+            background: var(--accent-blue); color: #ffffff; border-color: transparent;
+            box-shadow: 0 4px 14px rgba(10, 132, 255, 0.38);
+        }}
+        .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; margin-top: 16px; }}
+        .glass-card {{
+            position: relative; background: var(--glass-bg);
+            backdrop-filter: blur(28px) saturate(190%); -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid var(--glass-border); border-top-color: var(--glass-highlight);
+            box-shadow: var(--shadow-glass); border-radius: 24px; padding: 22px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+        }}
+        .glass-card:hover {{ transform: translateY(-4px); background: var(--glass-bg-hover); border-color: var(--glass-highlight); }}
+        .card-header {{ display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }}
+        .glass-pill {{ padding: 4px 11px; border-radius: 999px; font-size: 0.73rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.16); }}
+        .pill-amber {{ background: rgba(255, 214, 10, 0.16); color: #ffd60a; }}
+        .pill-green {{ background: rgba(48, 209, 88, 0.16); color: #32d74b; }}
+        .pill-purple {{ background: rgba(191, 90, 242, 0.18); color: #bf5af2; }}
+        .pill-orange {{ background: rgba(255, 159, 10, 0.18); color: #ff9f0a; }}
+        .pill-pink {{ background: rgba(255, 55, 95, 0.18); color: #ff375f; }}
+        .pill-blue {{ background: rgba(10, 132, 255, 0.18); color: #64d2ff; }}
+        .pill-teal {{ background: rgba(100, 210, 255, 0.18); color: #5ac8fa; }}
+        body.light-mode .pill-amber {{ color: #9a6700; background: rgba(255, 204, 0, 0.22); }}
+        body.light-mode .pill-green {{ color: #1a7f37; background: rgba(52, 199, 89, 0.2); }}
+        body.light-mode .pill-purple {{ color: #8250df; background: rgba(175, 82, 222, 0.16); }}
+        body.light-mode .pill-orange {{ color: #bc4c00; background: rgba(255, 149, 0, 0.18); }}
+        body.light-mode .pill-pink {{ color: #cf22e; background: rgba(255, 45, 85, 0.16); }}
+        body.light-mode .pill-blue {{ color: #0969da; background: rgba(0, 122, 255, 0.15); }}
+        body.light-mode .pill-teal {{ color: #0550ae; background: rgba(50, 173, 230, 0.18); }}
+        .card-date {{ font-size: 0.75rem; color: var(--text-tertiary); white-space: nowrap; }}
+        .card-title {{ margin: 0 0 6px 0; font-size: 1.04rem; font-weight: 600; line-height: 1.38; letter-spacing: -0.01em; }}
+        .card-subtitle {{ margin: 0 0 14px 0; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }}
+        .spec-box {{
+            background: var(--spec-bg); border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 15px; padding: 12px 14px; margin-bottom: 16px;
+            display: flex; flex-direction: column; gap: 7px;
+        }}
+        .spec-row {{ display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 0.82rem; }}
+        .spec-label {{ color: var(--text-tertiary); font-weight: 500; flex-shrink: 0; }}
+        .spec-val {{ color: var(--text-primary); font-weight: 500; text-align: right; }}
+        .highlight-prazo {{ color: #64d2ff; font-weight: 600; }}
+        body.light-mode .highlight-prazo {{ color: #007aff; }}
+        .spec-desc {{ font-size: 0.81rem; color: var(--text-secondary); line-height: 1.45; margin-top: 2px; }}
+        .apple-btn {{
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%;
+            background: var(--accent-blue); color: #ffffff; text-decoration: none; padding: 11px 16px;
+            border-radius: 13px; font-size: 0.86rem; font-weight: 600; transition: all 0.22s ease;
+            box-shadow: 0 4px 14px rgba(10, 132, 255, 0.3);
+        }}
+        .apple-btn:hover {{ background: var(--accent-blue-hover); transform: scale(1.01); }}
+        .btn-emerald {{ background: #28a745; box-shadow: 0 4px 14px rgba(40, 167, 69, 0.28); }}
+        .btn-emerald:hover {{ background: #2fb94e; }}
+        .hidden {{ display: none !important; }}
+        .vazio {{ grid-column: 1 / -1; text-align: center; color: var(--text-secondary); }}
+    </style>
+</head>
+<body>
+    <div class="ambient-canvas"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+    <div class="container">
+        <header class="hero-glass">
+            <div>
+                <div class="hero-badge"><span class="pulse-dot"></span> Monitoramento Ativo • {atualizacao}</div>
+                <h1>Radar Engenharia Mecânica</h1>
+                <p class="hero-sub">Estágios (RJ & Baixada) • Bolsas PIBIC / FAPERJ / CNPq • Desafios • Certificações Lattes</p>
             </div>
-            <h3 class="card-title">{c['titulo']}</h3>
-            <p class
+            <button class="theme-toggle" onclick="alternarTema()" id="btn-tema">☀️ Modo Claro</button>
+        </header>
+
+        <nav class="segmented-bar">
+            <button class="tab-btn active" onclick="mudarAba('todas', this)">Todas ({len(itens)})</button>
+            <button class="tab-btn" onclick="mudarAba('estagios', this)">Estágios RJ & Baixada</button>
+            <button class="tab-btn" onclick="mudarAba('bolsas', this)">Bolsas PIBIC / FAPERJ / CNPq</button>
+            <button class="tab-btn" onclick="mudarAba('desafios', this)">Desafios & Hackathons</button>
+            <button class="tab-btn" onclick="mudarAba('cursos', this)">Cursos & Certificados Lattes</button>
+        </nav>
+
+        <div id="painel-oportunidades">
+            <div class="section-label">Acesso Rápido aos Portais</div>
+            <div class="dock-links">
+                <a href="https://www.trf2.jus.br/trf2/institucional/estagio" target="_blank">⚖️ TRF2 Estágios</a>
+                <a href="https://www.nube.com.br/vagas-de-estagio/engenharia-mecanica" target="_blank">📋 Nube Mecânica</a>
+                <a href="https://www.mudes.org.br/" target="_blank">📋 MUDES RJ</a>
+                <a href="https://portal.ciee.org.br/processos-seletivos-especiais/" target="_blank">📋 CIEE Editais</a>
+                <a href="https://www.faperj.br/?id=28.5.7" target="_blank">🔬 FAPERJ Editais</a>
+                <a href="https://www.gov.br/cnpq/pt-br/acesso-a-informacao/acoes-e-programas/programas/programas-ict" target="_blank">🔬 CNPq / PIBIC</a>
+                <a href="https://www.cefet-rj.br/index.php/editais-e-processos-seletivos" target="_blank">🎓 CEFET/UFCIRJ</a>
+                <a href="https://www.spaceappschallenge.org/" target="_blank">🚀 NASA Space Apps</a>
+                <a href="https://gogreen.se.com/" target="_blank">🌱 Schneider Go Green</a>
+            </div>
+
+            <div id="controles-estagio">
+                <div class="section-label">Filtrar por Localidade</div>
+                <div class="filter-row" id="filtro-city">
+                    <button class="filter-pill active" onclick="setCity('todas', this)">Todas as Cidades</button>
+                    <button class="filter-pill" onclick="setCity('Rio de Janeiro', this)">Rio de Janeiro</button>
+                    <button class="filter-pill" onclick="setCity('Duque de Caxias', this)">Duque de Caxias</button>
+                    <button class="filter-pill" onclick="setCity('Nova Iguaçu', this)">Nova Iguaçu</button>
+                    <button class="filter-pill" onclick="setCity('Belford Roxo', this)">Belford Roxo</button>
+                </div>
+            </div>
+
+            <div class="grid" id="grid-oportunidades">
+                {html_oportunidades}
+            </div>
+        </div>
+
+        <div id="painel-cursos" class="hidden">
+            <div class="section-label">Trilhas Gratuitas com Certificado</div>
+            <div class="filter-row" id="filtro-curso">
+                <button class="filter-pill active" onclick="setCursoArea('todas', this)">Todos ({len(CURSOS_CERTIFICADOS)})</button>
+                <button class="filter-pill" onclick="setCursoArea('CAD / CAE / Simulação', this)">CAD / CAE / ANSYS / SolidWorks</button>
+                <button class="filter-pill" onclick="setCursoArea('ITA / IME / Instituições BR', this)">ITA / IME / Brasil</button>
+                <button class="filter-pill" onclick="setCursoArea('Energias Renováveis (Exterior)', this)">Energias Renováveis (Exterior)</button>
+                <button class="filter-pill" onclick="setCursoArea('Programação & Dados', this)">Python & Dados</button>
+            </div>
+            <div class="grid">
+                {html_cursos}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let abaAtual = 'todas';
+        let cityAtual = 'todas';
+
+        function alternarTema() {{
+            document.body.classList.toggle('light-mode');
+            const btn = document.getElementById('btn-tema');
+            btn.textContent = document.body.classList.contains('light-mode') ? '🌙 Modo Escuro' : '☀️ Modo Claro';
+        }}
+
+        function mudarAba(aba, btn) {{
+            abaAtual = aba;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const painelOp = document.getElementById('painel-oportunidades');
+            const painelCursos = document.getElementById('painel-cursos');
+            const controlesEstagio = document.getElementById('controles-estagio');
+            if (aba === 'cursos') {{
+                painelOp.classList.add('hidden');
+                painelCursos.classList.remove('hidden');
+            }} else {{
+                painelCursos.classList.add('hidden');
+                painelOp.classList.remove('hidden');
+                controlesEstagio.style.display = (aba === 'estagios' || aba === 'todas') ? 'block' : 'none';
+                aplicarFiltros();
+            }}
+        }}
+
+        function aplicarFiltros() {{
+            document.querySelectorAll('.item-dinamico').forEach(card => {{
+                const matchAba = (abaAtual === 'todas' || card.dataset.aba === abaAtual);
+                const matchCity = (cityAtual === 'todas' || abaAtual === 'bolsas' || abaAtual === 'desafios' || card.dataset.city.includes(cityAtual));
+                card.style.display = (matchAba && matchCity) ? 'flex' : 'none';
+            }});
+        }}
+
+        function setCity(city, btn) {{
+            cityAtual = city;
+            document.querySelectorAll('#filtro-city button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            aplicarFiltros();
+        }}
+
+        function setCursoArea(area, btn) {{
+            document.querySelectorAll('#filtro-curso button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.card-curso').forEach(card => {{
+                card.style.display = (area === 'todas' || card.dataset.cursoArea === area) ? 'flex' : 'none';
+            }});
+        }}
+    </script>
+</body>
+</html>"""
+
+    with open("index.html", "w", encoding="utf-8") as f:
+        f.write(pagina)
+
+
+def main():
+    antigas = []
+    if os.path.exists(ARQUIVO_DADOS):
+        try:
+            with open(ARQUIVO_DADOS, "r", encoding="utf-8") as f:
+                antigas = json.load(f)
+        except Exception:
+            antigas = []
+
+    links_antigos = {v["link"] for v in antigas}
+    brutas = (
+        buscar_orgaos_publicos()
+        + buscar_nube_mecanica()
+        + buscar_gupy_rj()
+        + buscar_bolsas_abertas()
+        + buscar_desafios_abertos()
+    )
+
+    vistos_links = set()
+    titulos_aceitos = []
+    unicas = []
+    ineditas = []
+
+    for v in brutas:
+        if v["link"] in vistos_links:
+            continue
+        if eh_titulo_semelhante(v["titulo"], titulos_aceitos):
+            continue
+
+        vistos_links.add(v["link"])
+        titulos_aceitos.append(v["titulo"])
+        unicas.append(v)
+
+        if v["link"] not in links_antigos:
+            ineditas.append(v)
+
+    with open(ARQUIVO_DADOS, "w", encoding="utf-8") as f:
+        json.dump(unicas, f, ensure_ascii=False, indent=2)
+
+    gerar_html(unicas)
+    enviar_telegram(ineditas)
+    print(f"Concluído! {len(unicas)} oportunidades abertas e únicas ({len(ineditas)} novas enviadas ao Telegram).")
+
+
+if __name__ == "__main__":
+    main()
